@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TSITS_WebRTC</string>
+    <string name="login">登 1     2 3 录</string>
+    <string name="password">登陆密码</string>
+    <string name="account">用户名称</string>
+    <string name="forget_password">忘记我的密码</string>
+    <string name="version_number">版本号</string>
+    <string name="group">组</string>
+    <string name="message">信息</string>
+    <string name="microphone">麦克风</string>
+    <string name="map">地图</string>
+    <string name="work">视频</string>
+
+
+</resources>
