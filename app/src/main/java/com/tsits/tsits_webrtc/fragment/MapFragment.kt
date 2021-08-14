@@ -30,10 +30,10 @@ class MapFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        turntoGroupDetail()
+        turnToLoginDetail()
     }
 
-    private fun turntoGroupDetail() {
+    private fun turnToLoginDetail() {
         toolbar_navigation_map.setOnClickListener(){
             var intent= Intent(context!!, LoginActivity::class.java)
             context?.startActivity(intent)
