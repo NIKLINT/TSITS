@@ -1,5 +1,8 @@
 package com.tsits.tsits_webrtc.activity
 
+import android.app.Activity
+import android.app.ActivityManager
+import android.app.Notification
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
 
+
             }
             false
         }
@@ -61,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()

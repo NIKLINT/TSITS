@@ -15,4 +15,7 @@
     <color name="itemTint">#878787</color>
     <color name="itemTextColor">#121212</color>
     <color name="red">#F01818</color>
+    <color name="gray">#969696</color>
+    <color name="dark_gray">#4B4B4B</color>
+    <color name="lilac">#b0a4e3</color>
 </resources>

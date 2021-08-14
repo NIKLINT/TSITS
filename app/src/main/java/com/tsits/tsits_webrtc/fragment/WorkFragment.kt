@@ -10,6 +10,7 @@ import android.view.ViewGroup
 
 import com.tsits.tsits_webrtc.R
 import com.tsits.tsits_webrtc.activity.MessageTalkingRoomActivity
+import com.tsits.tsits_webrtc.activity.VoiceCallActivity
 import kotlinx.android.synthetic.main.fragment_work.*
 
 
@@ -32,8 +33,8 @@ class WorkFragment() : Fragment() {
 
 
     private fun HideBottomNavigation() {
-        turntext?.setOnClickListener {
-            var intent = Intent(context!!, MessageTalkingRoomActivity::class.java)
+        toolbar_navigation?.setOnClickListener {
+            var intent = Intent(context!!, VoiceCallActivity::class.java)
             context?.startActivity(intent)
         }
 

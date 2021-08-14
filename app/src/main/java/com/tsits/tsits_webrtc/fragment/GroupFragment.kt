@@ -1,6 +1,7 @@
 package com.tsits.tsits_webrtc.fragment
 
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tsits.tsits_webrtc.adapter.ContantRvAdapter
 import kotlinx.android.synthetic.main.fragment_group.*
@@ -12,6 +13,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.tsits.tsits_webrtc.R
+import com.tsits.tsits_webrtc.activity.GroupDetailActivity
+import com.tsits.tsits_webrtc.activity.LoginActivity
 import com.tsits.tsits_webrtc.entity.Contant
 import com.tsits.tsits_webrtc.entity.ContantTitle
 
@@ -26,6 +29,14 @@ class GroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        turntoLogin()
+    }
+
+    private fun turntoLogin() {
+        toolbar_navigation.setOnClickListener(){
+            var intent=Intent(context!!,GroupDetailActivity::class.java)
+            context?.startActivity(intent)
+        }
     }
 
     private fun initRecyclerView() {
