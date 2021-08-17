@@ -1,18 +1,17 @@
 package com.tsits.tsits_webrtc.activity
 
-import android.app.Activity
-import android.app.ActivityManager
-import android.app.Notification
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.tsits.tsits_webrtc.*
+import android.view.MotionEvent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.tsits.tsits_webrtc.*
 import com.tsits.tsits_webrtc.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_message_talking.*
 
 
-class MainActivity : AppCompatActivity() {
+ class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.feather_message_square -> {
                     title = resources.getString(R.string.message)
                     loadFragment(MessageFragment())
+
                     return@setOnNavigationItemSelectedListener true
                 }
 

@@ -57,8 +57,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation (name:'BaiduLBS_AndroidSDK_Lib',ext:'aar')
+    implementation(name: 'BaiduLBS_AndroidSDK_Lib', ext: 'aar')
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha09'
+
 
 }
 

@@ -50,9 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,23 +59,6 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/ic_oval"
-        android:src="@drawable/ic_icon_material_record_voice_over"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/talkingroomedittext"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView2"></ImageButton>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
@@ -85,7 +66,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded_button_lilac_menu"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -230,25 +211,39 @@
             app:srcCompat="@drawable/ic_icon_ionic_ios_arrow_down" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@color/dark_blue"
+        app:itemIconSize="36dp"
+        app:itemIconTint="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
     <EditText
         android:id="@+id/talkingroomedittext"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_search"
+        android:ellipsize="end"
         android:gravity="start|center_vertical"
+        android:maxLines="1"
         android:paddingLeft="15dp"
         android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:visibility="visible"
         android:paddingEnd="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        android:paddingBottom="2dp"
+        android:layout_marginEnd="10dp"
+        android:singleLine="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView2"></EditText>
+        app:layout_constraintTop_toTopOf="@+id/imageButton"></EditText>
 
     <ImageButton
         android:id="@+id/imageButton19"
@@ -261,6 +256,18 @@
         app:layout_constraintStart_toStartOf="@+id/talkingroomedittext"
         app:layout_constraintTop_toTopOf="@+id/talkingroomedittext"
         app:srcCompat="@drawable/icon_material_attach_file" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_oval"
+        android:src="@drawable/ic_icon_material_record_voice_over"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"></ImageButton>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

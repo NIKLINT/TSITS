@@ -2,13 +2,16 @@ package com.tsits.tsits_webrtc.activity
 
 import android.app.Dialog
 import android.content.Context
-import android.opengl.Visibility
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.tsits.tsits_webrtc.R
+import com.tsits.tsits_webrtc.fragment.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_talking.*
 
 
@@ -19,10 +22,48 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message_talking)
-        imageButton.setOnTouchListener(this)
         MenuPackUp()
         MenuOpen()
+        imageButton.setOnTouchListener(this)
+        bottomNavigation1.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.material_group -> {
+                    title = resources.getString(R.string.group)
+                    findFragment(GroupFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.feather_message_square -> {
+                    title = resources.getString(R.string.message)
+                    findFragment(MessageFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.awesome_microphone -> {
+                    title = resources.getString(R.string.microphone)
+                    findFragment(MicrophoneFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.awesome_map -> {
+                    title = resources.getString(R.string.map)
+                    findFragment(MapFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.material_group_work -> {
+                    title = resources.getString(R.string.work)
+                    findFragment(WorkFragment())
+
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+
+            }
+            false
+        }
     }
+
 
 
     protected fun SetDialogStyle(context: Context) {
@@ -43,11 +84,9 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener {
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                Toast.makeText(this, "手指上来啦！", Toast.LENGTH_SHORT).show()
                 isButtonDown(view)
             }
             MotionEvent.ACTION_UP -> {
-                Toast.makeText(this, "手指放开啦！", Toast.LENGTH_SHORT).show()
                 isButtonUp(view)
             }
         }
@@ -67,16 +106,36 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener {
     fun MenuOpen() {
         imageButton19.setOnClickListener() {
             constraintLayout1.visibility = View.VISIBLE
+
+        }
+    }
+
+    fun MenuPackUp() {
+        imageButton8.setOnClickListener() {
+            constraintLayout1.visibility = View.GONE
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun findFragment(fragment: Fragment) {
+        var fragment=supportFragmentManager.findFragmentById(R.id.container)
+        if(fragment==null){
+            return
         }
     }
 
 
-    fun MenuPackUp() {
 
-        imageButton8.setOnClickListener() {
-            constraintLayout1.visibility = View.GONE
 
-        }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 

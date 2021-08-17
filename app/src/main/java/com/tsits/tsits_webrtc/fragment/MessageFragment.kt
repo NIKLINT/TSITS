@@ -22,12 +22,15 @@ class MessageFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         toolbar_navigation.setOnClickListener(){
             var intent=Intent(context,MessageTalkingRoomActivity::class.java)
             context?.startActivity(intent)
         }
-
-
     }
 
 }
