@@ -229,45 +229,84 @@
         android:id="@+id/talkingroomedittext"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/rounded_button_search"
         android:ellipsize="end"
         android:gravity="start|center_vertical"
         android:maxLines="1"
         android:paddingLeft="15dp"
         android:paddingTop="2dp"
-        android:paddingEnd="30dp"
+        android:paddingEnd="40dp"
         android:paddingBottom="2dp"
-        android:layout_marginEnd="10dp"
         android:singleLine="true"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"></EditText>
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.0"></EditText>
+
+    <TextView
+        android:id="@+id/talkingroomtextview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounded_button_search"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="按  住  说  话"
+        android:textSize="15sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.0"></TextView>
 
     <ImageButton
         android:id="@+id/imageButton19"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="#0000"
         app:layout_constraintBottom_toBottomOf="@+id/talkingroomedittext"
         app:layout_constraintEnd_toEndOf="@+id/talkingroomedittext"
-        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="@+id/talkingroomedittext"
         app:layout_constraintTop_toTopOf="@+id/talkingroomedittext"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/icon_material_attach_file" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/ic_oval"
-        android:src="@drawable/ic_icon_material_record_voice_over"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"></ImageButton>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"></ImageView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,21 +1,22 @@
 package com.tsits.tsits_webrtc.activity
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.tsits.tsits_webrtc.R
 import com.tsits.tsits_webrtc.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_talking.*
 
 
-class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener {
+class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener{
     private lateinit var dialog: Dialog
 
 
@@ -24,46 +25,34 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener {
         setContentView(R.layout.activity_message_talking)
         MenuPackUp()
         MenuOpen()
-        imageButton.setOnTouchListener(this)
-        bottomNavigation1.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.material_group -> {
-                    title = resources.getString(R.string.group)
-                    findFragment(GroupFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-
-                R.id.feather_message_square -> {
-                    title = resources.getString(R.string.message)
-                    findFragment(MessageFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-
-                R.id.awesome_microphone -> {
-                    title = resources.getString(R.string.microphone)
-                    findFragment(MicrophoneFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-
-                R.id.awesome_map -> {
-                    title = resources.getString(R.string.map)
-                    findFragment(MapFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-
-                R.id.material_group_work -> {
-                    title = resources.getString(R.string.work)
-                    findFragment(WorkFragment())
-
-                    return@setOnNavigationItemSelectedListener true
-                }
-
-
-            }
-            false
-        }
+        talkingroomtextview.setOnTouchListener(this)
+        changeTalkKeyboard()
     }
 
+    fun changeTalkKeyboard() {
+        var i = 0
+        imageView.setImageResource(R.drawable.ic_icon_material_record_voice_over)
+        talkingroomtextview.visibility=View.GONE
+        talkingroomedittext.visibility=View.VISIBLE
+        imageButton19.visibility=View.VISIBLE
+        imageButton.setOnClickListener {
+            //创建点击事件
+            i++
+            if (i % 2 == 0) {
+                imageView.setImageResource(R.drawable.ic_icon_material_record_voice_over)
+                talkingroomtextview.visibility=View.GONE
+                talkingroomedittext.visibility=View.VISIBLE
+                imageButton19.visibility=View.VISIBLE
+            } else {
+                imageView.setImageResource(R.drawable.ic_icon_awesome_keyboard)
+                talkingroomtextview.visibility=View.VISIBLE
+                talkingroomedittext.visibility=View.GONE
+                imageButton19.visibility=View.GONE
+
+            }
+        }
+
+    }
 
 
     protected fun SetDialogStyle(context: Context) {
@@ -124,13 +113,11 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener {
     }
 
     private fun findFragment(fragment: Fragment) {
-        var fragment=supportFragmentManager.findFragmentById(R.id.container)
-        if(fragment==null){
+        var fragment = supportFragmentManager.findFragmentById(R.id.container)
+        if (fragment == null) {
             return
         }
     }
-
-
 
 
     override fun onBackPressed() {
