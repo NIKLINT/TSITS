@@ -16,18 +16,29 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_talking.*
 
 
-class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener{
+class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener{
     private lateinit var dialog: Dialog
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        return inflater.inflate(R.layout.activity_message_talking, container,false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_message_talking)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         MenuPackUp()
         MenuOpen()
         talkingroomtextview.setOnTouchListener(this)
         changeTalkKeyboard()
     }
+
+
 
     fun changeTalkKeyboard() {
         var i = 0
@@ -83,7 +94,7 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener{
     }
 
     fun isButtonDown(view: View?) {
-        AlertDialog.Builder(this).apply {
+        AlertDialog.Builder(activity!!).apply {
             SetDialogStyle(context)
         }
     }
@@ -105,25 +116,7 @@ class MessageTalkingRoomActivity : AppCompatActivity(), View.OnTouchListener{
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 
-    private fun findFragment(fragment: Fragment) {
-        var fragment = supportFragmentManager.findFragmentById(R.id.container)
-        if (fragment == null) {
-            return
-        }
-    }
-
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
 
 
 }

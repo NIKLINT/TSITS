@@ -48,7 +48,8 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/rounded_button_search"
         android:drawableLeft="@drawable/icon_search"
-        android:paddingLeft="20dp"
+        android:clickable="true"
+        android:paddingLeft="15dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +57,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="5dp"
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -18,6 +18,10 @@ import kotlinx.android.synthetic.main.activity_message_talking.*
         setContentView(R.layout.activity_main)
         loadFragment(GroupFragment())
 
+        wsw.setOnClickListener(){
+            loadFragment(MessageTalkingRoomFragment())
+        }
+
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.material_group -> {
@@ -51,6 +55,10 @@ import kotlinx.android.synthetic.main.activity_message_talking.*
 
                     return@setOnNavigationItemSelectedListener true
                 }
+
+
+
+
 
 
             }

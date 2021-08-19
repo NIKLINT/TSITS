@@ -43,7 +43,7 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/rounded_button_search"
         android:drawableLeft="@drawable/icon_search"
-        android:paddingLeft="20dp"
+        android:paddingLeft="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_operator_name"
-        app:layout_constraintVertical_weight="1" />
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
