@@ -1,13 +1,13 @@
 package com.tsits.tsits_webrtc.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +17,7 @@ import com.tsits.tsits_webrtc.entity.MessageContant
 import kotlinx.android.synthetic.main.fragment_message.*
 
 
-class MessageFragment : Fragment() {
+class MessageFragment : Fragment(){
 
 
     override fun onCreateView(
@@ -31,13 +31,19 @@ class MessageFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 
     @SuppressLint("ResourceType")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
+        toolbar_navigation_message.setOnClickListener() {
+            val ft = fragmentManager!!.beginTransaction()
+            ft.hide(MessageFragment())
+            ft.add(R.id.message_container, MessageTalkingRoomFragment())
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            ft.commit()
+        }
     }
 
 
@@ -68,5 +74,6 @@ class MessageFragment : Fragment() {
         }
         return dataList
     }
+
 
 }

@@ -35,7 +35,7 @@ class GroupFragment : Fragment() {
     }
 
     private fun turntoLogin() {
-        toolbar_navigation.setOnClickListener(){
+        toolbar_navigation_group.setOnClickListener(){
             var intent=Intent(context!!,GroupDetailActivity::class.java)
             context?.startActivity(intent)
         }
@@ -49,7 +49,6 @@ class GroupFragment : Fragment() {
         val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = adapter
-
         adapter.setData(dataList)
     }
 
