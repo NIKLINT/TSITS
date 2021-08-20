@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tsits.tsits_webrtc.R
+import com.tsits.tsits_webrtc.activity.MainActivity
 import com.tsits.tsits_webrtc.adapter.MessageContantRvAdapter
 import com.tsits.tsits_webrtc.entity.MessageContant
 import kotlinx.android.synthetic.main.fragment_message.*
@@ -37,13 +38,8 @@ class MessageFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        toolbar_navigation_message.setOnClickListener() {
-            val ft = fragmentManager!!.beginTransaction()
-            ft.hide(MessageFragment())
-            ft.add(R.id.message_container, MessageTalkingRoomFragment())
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            ft.commit()
-        }
+        turnToMessageTalkingRoomFragment()
+
     }
 
 
@@ -74,6 +70,17 @@ class MessageFragment : Fragment(){
         }
         return dataList
     }
+
+    fun turnToMessageTalkingRoomFragment() {
+        toolbar_navigation_message.setOnClickListener() {
+            val ft = activity!!.supportFragmentManager.beginTransaction()
+            ft.replace(R.id.linearLayout4, MessageTalkingRoomFragment())
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            ft.commit()
+        }
+    }
+
+
 
 
 }

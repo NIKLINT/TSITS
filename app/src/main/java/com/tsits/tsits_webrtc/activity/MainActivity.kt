@@ -1,5 +1,6 @@
 package com.tsits.tsits_webrtc.activity
 
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var microphoneFragment: MicrophoneFragment? = null
     private var mapFragment: MapFragment? = null
     private var workFragment: WorkFragment? = null
+    private var currentFragment:Fragment?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,37 +32,37 @@ class MainActivity : AppCompatActivity() {
         microphoneFragment = MicrophoneFragment()
         mapFragment = MapFragment()
         workFragment = WorkFragment()
-        groupFragment?.let { its-> loadFragment(its) }
+        groupFragment?.let { its -> loadFragment(its) }
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.material_group -> {
                     title = resources.getString(R.string.group)
-                    groupFragment?.let { its-> loadFragment(its) }
+                    groupFragment?.let { its -> loadFragment(its) }
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.feather_message_square -> {
                     title = resources.getString(R.string.message)
-                    messageFragment?.let { its-> loadFragment(its) }
+                    messageFragment?.let { its -> loadFragment(its) }
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.awesome_microphone -> {
                     title = resources.getString(R.string.microphone)
-                    microphoneFragment?.let { its-> loadFragment(its) }
+                    microphoneFragment?.let { its -> loadFragment(its) }
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.awesome_map -> {
                     title = resources.getString(R.string.map)
-                    mapFragment?.let { its-> loadFragment(its) }
+                    mapFragment?.let { its -> loadFragment(its) }
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.material_group_work -> {
                     title = resources.getString(R.string.work)
-                    workFragment?.let { its-> loadFragment(its) }
+                    workFragment?.let { its -> loadFragment(its) }
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -72,14 +74,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        //判断当前Fragment存在不存在
+        if(!fragment.isAdded()){
+            if (currentFragment!=null){
+                transaction.hide(currentFragment!!)
+            }
+            transaction.add(R.id.container, fragment).commit()
+        }else{
+            transaction.hide(currentFragment!!)
+            transaction.show(fragment).commit()
+        }
+        //更改当前的fragment所指向的值
+        currentFragment = fragment
     }
+
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
     }
+
+
 
 }
