@@ -1,22 +1,15 @@
-package com.tsits.tsits_webrtc.activity
+package com.tsits.tsits_webrtc.fragment
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.fragment.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_talking.*
 
-
-class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener{
+class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener {
     private lateinit var dialog: Dialog
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,22 +36,22 @@ class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener{
     fun changeTalkKeyboard() {
         var i = 0
         imageView.setImageResource(R.drawable.ic_icon_material_record_voice_over)
-        talkingroomtextview.visibility=View.GONE
-        talkingroomedittext.visibility=View.VISIBLE
-        imageButton19.visibility=View.VISIBLE
+        talkingroomtextview.visibility= View.GONE
+        talkingroomedittext.visibility= View.VISIBLE
+        imageButton19.visibility= View.VISIBLE
         imageButton.setOnClickListener {
             //创建点击事件
             i++
             if (i % 2 == 0) {
                 imageView.setImageResource(R.drawable.ic_icon_material_record_voice_over)
-                talkingroomtextview.visibility=View.GONE
-                talkingroomedittext.visibility=View.VISIBLE
-                imageButton19.visibility=View.VISIBLE
+                talkingroomtextview.visibility= View.GONE
+                talkingroomedittext.visibility= View.VISIBLE
+                imageButton19.visibility= View.VISIBLE
             } else {
                 imageView.setImageResource(R.drawable.ic_icon_awesome_keyboard)
-                talkingroomtextview.visibility=View.VISIBLE
-                talkingroomedittext.visibility=View.GONE
-                imageButton19.visibility=View.GONE
+                talkingroomtextview.visibility= View.VISIBLE
+                talkingroomedittext.visibility= View.GONE
+                imageButton19.visibility= View.GONE
 
             }
         }
@@ -120,7 +113,3 @@ class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener{
 
 
 }
-
-
-
-

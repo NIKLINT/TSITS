@@ -1,26 +1,24 @@
 package com.tsits.tsits_webrtc.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.*
 import com.tsits.tsits_webrtc.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_talking.*
+import kotlinx.android.synthetic.main.activity_message_talking.toolbar_navigation
+import kotlinx.android.synthetic.main.fragment_message.*
 
 
- class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadFragment(GroupFragment())
-
-        wsw.setOnClickListener(){
-            loadFragment(MessageTalkingRoomFragment())
-        }
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -56,13 +54,14 @@ import kotlinx.android.synthetic.main.activity_message_talking.*
                     return@setOnNavigationItemSelectedListener true
                 }
 
-
-
-
-
-
             }
             false
+        }
+
+        toolbar_navigation.setOnClickListener() {
+            loadFragment(MessageTalkingRoomFragment())
+
+
         }
 
     }
