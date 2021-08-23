@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
 import com.tsits.tsits_webrtc.`interface`.MyOnTouchListener
 import com.tsits.tsits_webrtc.activity.MainActivity
-import kotlinx.android.synthetic.main.activity_message_talking.*
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_microphone.*
 import java.time.chrono.ThaiBuddhistEra

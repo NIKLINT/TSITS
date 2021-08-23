@@ -8,7 +8,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
-import kotlinx.android.synthetic.main.activity_message_talking.*
+import kotlinx.android.synthetic.main.fragment_message_talking.*
 
 typealias OnBackPressedTypeAlias = () -> Unit
 
@@ -20,7 +20,7 @@ class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.activity_message_talking, container, false)
+        return inflater.inflate(R.layout.fragment_message_talking, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

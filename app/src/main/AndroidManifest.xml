@@ -3,6 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tsits.tsits_webrtc">
+
     <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
     <dist:module dist:instant="true" />
 
@@ -21,7 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.MessageTalkingRoomActivity"></activity>
+
+
+        <service
+            android:name=".service.ChannelService"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".fragment.MessageTalkingRoomFragment"
+            tools:ignore="Instantiatable" />
         <activity android:name=".activity.GroupDetailActivity" />
         <activity android:name=".activity.VideoCallActivity" />
         <activity android:name=".activity.VoiceCallActivity" />
