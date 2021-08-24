@@ -24,9 +24,10 @@
         tools:replace="android:appComponentFactory">
 
 
+
         <service
             android:name=".service.ChannelService"
-            tools:ignore="Instantiatable" />
+            />
 
         <activity
             android:name=".fragment.MessageTalkingRoomFragment"

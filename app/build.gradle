@@ -68,9 +68,6 @@ dependencies {
     implementation(name: 'BaiduLBS_AndroidSDK_Lib', ext: 'aar')
     implementation(name: 'escodec', ext: 'aar')
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    //大概这两句的问题
-//    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
-//    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha09'
 
 
 }

@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         startService(Intent(this,ChannelService::class.java))
 
         chip1.setOnClickListener(){
-            sendBroadcast("bbb")
+            sendBroadcast("com.TSITS.AudioService.setMode")
         }
 
         supportActionBar?.hide()  //隐藏顶部状态栏
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     fun registerReceiver() {
          receiver=MyReceiver()
         val filter = IntentFilter()
-        filter.addAction("aaa")
+        filter.addAction("123")
         registerReceiver(receiver, filter)
     }
 
