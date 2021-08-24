@@ -1,17 +1,14 @@
 package com.tsits.tsits_webrtc.fragment
 
+import android.R.attr.resource
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.EventLog
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.`interface`.MyOnTouchListener
-import com.tsits.tsits_webrtc.activity.MainActivity
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_microphone.*
-import java.time.chrono.ThaiBuddhistEra
 
 
 class MicrophoneFragment : Fragment(), View.OnTouchListener {
@@ -41,6 +38,8 @@ class MicrophoneFragment : Fragment(), View.OnTouchListener {
                     tv_talking_state.visibility=View.VISIBLE
                     iv_green_background.visibility = View.VISIBLE
                     iv_green_background2.visibility = View.VISIBLE
+
+
                 }
                 MotionEvent.ACTION_UP -> {
                     tv_talking_state.visibility=View.GONE

@@ -25,9 +25,7 @@ class ChannelService : Service() {
         super.onCreate()
         Log.d("message", "service onCreate")
         registerReceiver()
-
     }
-
 
     private fun registerReceiver() {
         //设置广播接收者类型
@@ -37,7 +35,6 @@ class ChannelService : Service() {
         intentFilter.addAction("com.TSITS.AudioService.getMode")//further more
         registerReceiver(receiver, intentFilter)
     }
-
 
     fun showSingleAlertDialog() {
         val items =
