@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_message.*
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(){
 
     private var TAG = "MainActivity"
     private var i = 0
@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         startService(Intent(this, ChannelService::class.java))
-
-        chip1.setOnClickListener(this)
-        chip2.setOnClickListener(this)
+//
+//        chip1.setOnClickListener(this)
+//        chip2.setOnClickListener(this)
         whichIsCliclk()
 
 
@@ -59,64 +59,64 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         groupFragment?.let { its -> loadFragment(its) }
     }
 
-    //如果与服务的连接处于未连接状态，则尝试连接
-    override fun onClick(p0: View?) {
-        if (!mBound) {
-            Log.e(TAG, " connected now")
-            attemptToBindService()
-            Toast.makeText(this, "当前与服务端处于未连接状态，正在尝试重连，请稍后再试", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (data == null)
-            return
-
-        //发送数据，接收数据
-        when (p0?.id) {
-            R.id.chip1 -> {
-                data!!.setData("setMode" + 18)
-                Toast.makeText(this, "Audio Mode Set To :$data", Toast.LENGTH_LONG).show()
-
-            }
-            R.id.chip2 -> {
-                list = data!!.data as ArrayList<String>
-                var modeShow = StringBuffer()
-                for (d in list) {
-                    modeShow.append(d).append("\n")
-                }
-                Toast.makeText(this, "Audio Mode Get Mode: $data", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    //连接服务
-    private fun attemptToBindService() {
-        val intent = Intent()
-        intent.action = "com.tsits.tsits_webrtc.AIDL" //在AndroidManifest.xml进行配置隐形启动action
-        intent.`package` = "com.tsits.tsits_webrtc" //你的包名
-        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
-    }
-
-    private val mServiceConnection = object : ServiceConnection {
-        override fun onServiceConnected(name: ComponentName, service: IBinder) {
-            Log.e(TAG, "service connected")
-            data = aidl_Data.Stub.asInterface(service)
-            mBound = true
-            if (data != null) {
-                try {
-                    list = data!!.data as ArrayList<String>
-                } catch (e: RemoteException) {
-                    e.printStackTrace()
-                }
-
-            }
-        }
-
-        //未连接服务状态
-        override fun onServiceDisconnected(name: ComponentName) {
-            Log.e(TAG, "service disconnected")
-            mBound = false
-        }
-    }
+//    //如果与服务的连接处于未连接状态，则尝试连接
+//    override fun onClick(p0: View?) {
+//        if (!mBound) {
+//            Log.e(TAG, " connected now")
+//            attemptToBindService()
+//            Toast.makeText(this, "当前与服务端处于未连接状态，正在尝试重连，请稍后再试", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//        if (data == null)
+//            return
+//
+//        //发送数据，接收数据
+//        when (p0?.id) {
+//            R.id.chip1 -> {
+//                data!!.setData("setMode" + 18)
+//                Toast.makeText(this, "Audio Mode Set To :$data", Toast.LENGTH_SHORT).show()
+//
+//            }
+//            R.id.chip2 -> {
+//                list = data!!.data as ArrayList<String>
+//                var modeShow = StringBuffer()
+//                for (d in list) {
+//                    modeShow.append(d).append("\n")
+//                }
+//                Toast.makeText(this, "Audio Mode Get Mode: $data", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
+//
+//    //连接服务
+//    private fun attemptToBindService() {
+//        val intent = Intent()
+//        intent.action = "com.tsits.tsits_webrtc.AIDL" //在AndroidManifest.xml进行配置隐形启动action
+//        intent.`package` = "com.tsits.tsits_webrtc" //你的包名
+//        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
+//    }
+//
+//    private val mServiceConnection = object : ServiceConnection {
+//        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+//            Log.e(TAG, "service connected")
+//            data = aidl_Data.Stub.asInterface(service)
+//            mBound = true
+//            if (data != null) {
+//                try {
+//                    list = data!!.data as ArrayList<String>
+//                } catch (e: RemoteException) {
+//                    e.printStackTrace()
+//                }
+//
+//            }
+//        }
+//
+//        //未连接服务状态
+//        override fun onServiceDisconnected(name: ComponentName) {
+//            Log.e(TAG, "service disconnected")
+//            mBound = false
+//        }
+//    }
 
     //载入Fragment
     private fun loadFragment(fragment: Fragment) {

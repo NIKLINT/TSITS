@@ -3,9 +3,12 @@ package com.tsits.tsits_webrtc.fragment
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.os.IBinder
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
 import kotlinx.android.synthetic.main.fragment_message_talking.*
@@ -35,6 +38,8 @@ class MessageTalkingRoomFragment : Fragment(), View.OnTouchListener {
         changeTalkKeyboard()
         setOnHandleBackPressed()
     }
+
+
 
 
     fun changeTalkKeyboard() {
