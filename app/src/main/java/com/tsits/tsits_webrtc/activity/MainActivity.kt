@@ -5,11 +5,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.RemoteException
 import android.util.Log
-import android.view.KeyEvent
-import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,15 +15,15 @@ import com.tsits.tsits_webrtc.service.ChannelService
 import kotlinx.android.synthetic.main.activity_group_details.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_message.*
-import com.tsits.tsits_webrtc.aidl_Data
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var TAG = "MainActivity"
     private var i = 0
+
     //定义数据链表
-    var list= ArrayList<String>()
+    var list = ArrayList<String>()
 
     //由AIDL文件生成的Java类
     private var data: aidl_Data? = null
@@ -46,12 +42,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        startService(Intent(this, ChannelService::class.java))
 
         chip1.setOnClickListener(this)
         chip2.setOnClickListener(this)
         whichIsCliclk()
 
-        startService(Intent(this, ChannelService::class.java))
+
 
         supportActionBar?.hide()  //隐藏顶部状态栏
         groupFragment = GroupFragment()
@@ -62,37 +59,38 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         groupFragment?.let { its -> loadFragment(its) }
     }
 
+    //如果与服务的连接处于未连接状态，则尝试连接
     override fun onClick(p0: View?) {
-//如果与服务的连接处于未连接状态，则尝试连接
         if (!mBound) {
+            Log.e(TAG, " connected now")
             attemptToBindService()
             Toast.makeText(this, "当前与服务端处于未连接状态，正在尝试重连，请稍后再试", Toast.LENGTH_SHORT).show()
             return
         }
         if (data == null)
             return
+
+        //发送数据，接收数据
         when (p0?.id) {
             R.id.chip1 -> {
-                data!!.setData("data" + i)
-                i++
+                data!!.setData("setMode" + 18)
+                Toast.makeText(this, "Audio Mode Set To :$data", Toast.LENGTH_LONG).show()
+
             }
             R.id.chip2 -> {
                 list = data!!.data as ArrayList<String>
-                var sb = StringBuffer()
+                var modeShow = StringBuffer()
                 for (d in list) {
-                    sb.append(d).append("\n")
+                    modeShow.append(d).append("\n")
                 }
-                textView.text = sb
+                Toast.makeText(this, "Audio Mode Get Mode: $data", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-
-
     //连接服务
     private fun attemptToBindService() {
         val intent = Intent()
-        Log.e(TAG, " connected now")
         intent.action = "com.tsits.tsits_webrtc.AIDL" //在AndroidManifest.xml进行配置隐形启动action
         intent.`package` = "com.tsits.tsits_webrtc" //你的包名
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
@@ -113,12 +111,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
+        //未连接服务状态
         override fun onServiceDisconnected(name: ComponentName) {
             Log.e(TAG, "service disconnected")
             mBound = false
         }
     }
 
+    //载入Fragment
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         //判断当前Fragment存在不存在
@@ -145,7 +145,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onDestroy()
     }
 
-    fun whichIsCliclk(){
+    //按钮点击事件
+    fun whichIsCliclk() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.material_group -> {
@@ -182,8 +183,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             false
         }
     }
-
-
 
 
 }
