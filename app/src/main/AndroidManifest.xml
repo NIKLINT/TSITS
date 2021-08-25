@@ -22,12 +22,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:replace="android:appComponentFactory">
-
-
-
         <service
             android:name=".service.ChannelService"
-            />
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name ="com.tsits.tsits_webrtc.AIDL"/>
+            </intent-filter>
+        </service>
 
         <activity
             android:name=".fragment.MessageTalkingRoomFragment"
@@ -36,7 +38,9 @@
         <activity android:name=".activity.VideoCallActivity" />
         <activity android:name=".activity.VoiceCallActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

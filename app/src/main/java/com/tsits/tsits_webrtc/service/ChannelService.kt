@@ -16,9 +16,9 @@ class ChannelService : Service() {
     private val TAG = "ChannelService"
     private var receiver: ScreeOnBroadcastReceiver? = null
 
-    override fun onBind(p0: Intent?): IBinder? {
+    override fun onBind(intent: Intent?): IBinder? {
         Log.i(TAG, "onBind")
-        return null
+        return DataAiDl()
     }
 
     override fun onCreate() {

@@ -1,23 +1,39 @@
 package com.tsits.tsits_webrtc.activity
 
-import android.app.ProgressDialog.show
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.os.Bundle
+import android.os.IBinder
+import android.os.RemoteException
+import android.util.Log
+import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.*
 import com.tsits.tsits_webrtc.fragment.*
 import com.tsits.tsits_webrtc.service.ChannelService
+import kotlinx.android.synthetic.main.activity_group_details.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_message.*
+import com.tsits.tsits_webrtc.aidl_Data
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    private var TAG = "MainActivity"
+    private var i = 0
+    //定义数据链表
+    var list= ArrayList<String>()
+
+    //由AIDL文件生成的Java类
+    private var data: aidl_Data? = null
+
+    //标志当前与服务端连接状况的布尔值，false为未连接，true为连接中
+    private var mBound = false
 
     private var groupFragment: GroupFragment? = null
     private var messageFragment: MessageFragment? = null
@@ -25,19 +41,17 @@ class MainActivity : AppCompatActivity() {
     private var mapFragment: MapFragment? = null
     private var workFragment: WorkFragment? = null
     private var currentFragment: Fragment? = null
-    private var receiver:MyReceiver? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        registerReceiver()
-        startService(Intent(this,ChannelService::class.java))
+        chip1.setOnClickListener(this)
+        chip2.setOnClickListener(this)
+        whichIsCliclk()
 
-        chip1.setOnClickListener(){
-            sendBroadcast("com.TSITS.AudioService.setMode")
-        }
+        startService(Intent(this, ChannelService::class.java))
 
         supportActionBar?.hide()  //隐藏顶部状态栏
         groupFragment = GroupFragment()
@@ -46,7 +60,92 @@ class MainActivity : AppCompatActivity() {
         mapFragment = MapFragment()
         workFragment = WorkFragment()
         groupFragment?.let { its -> loadFragment(its) }
+    }
 
+    override fun onClick(p0: View?) {
+//如果与服务的连接处于未连接状态，则尝试连接
+        if (!mBound) {
+            attemptToBindService()
+            Toast.makeText(this, "当前与服务端处于未连接状态，正在尝试重连，请稍后再试", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (data == null)
+            return
+        when (p0?.id) {
+            R.id.chip1 -> {
+                data!!.setData("data" + i)
+                i++
+            }
+            R.id.chip2 -> {
+                list = data!!.data as ArrayList<String>
+                var sb = StringBuffer()
+                for (d in list) {
+                    sb.append(d).append("\n")
+                }
+                textView.text = sb
+            }
+        }
+    }
+
+
+
+    //连接服务
+    private fun attemptToBindService() {
+        val intent = Intent()
+        Log.e(TAG, " connected now")
+        intent.action = "com.tsits.tsits_webrtc.AIDL" //在AndroidManifest.xml进行配置隐形启动action
+        intent.`package` = "com.tsits.tsits_webrtc" //你的包名
+        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    private val mServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            Log.e(TAG, "service connected")
+            data = aidl_Data.Stub.asInterface(service)
+            mBound = true
+            if (data != null) {
+                try {
+                    list = data!!.data as ArrayList<String>
+                } catch (e: RemoteException) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
+
+        override fun onServiceDisconnected(name: ComponentName) {
+            Log.e(TAG, "service disconnected")
+            mBound = false
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        //判断当前Fragment存在不存在
+        if (!fragment.isAdded()) {
+            if (currentFragment != null) {
+                transaction.hide(currentFragment!!)
+            }
+            transaction.add(R.id.container, fragment).commit()
+        } else {
+            transaction.hide(currentFragment!!)
+            transaction.show(fragment).commit()
+        }
+        //更改当前的fragment所指向的值
+        currentFragment = fragment
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    fun whichIsCliclk(){
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.material_group -> {
@@ -82,59 +181,9 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-
-    }
-
-    //注册一个广播
-    class MyReceiver : BroadcastReceiver() {
-        override fun onReceive(context: Context,intent: Intent?) {
-            Toast.makeText(context, "接收广播", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun registerReceiver() {
-         receiver=MyReceiver()
-        val filter = IntentFilter()
-        filter.addAction("123")
-        registerReceiver(receiver, filter)
     }
 
 
-    fun sendBroadcast(action:String) {
-        var intent = Intent()
-        intent.action = action
-        sendBroadcast(intent)
-    }
-
-
-
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        //判断当前Fragment存在不存在
-        if (!fragment.isAdded()) {
-            if (currentFragment != null) {
-                transaction.hide(currentFragment!!)
-            }
-            transaction.add(R.id.container, fragment).commit()
-        } else {
-            transaction.hide(currentFragment!!)
-            transaction.show(fragment).commit()
-        }
-        //更改当前的fragment所指向的值
-        currentFragment = fragment
-    }
-
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        receiver?.let {
-            unregisterReceiver(it)
-        }
-    }
 
 
 }
