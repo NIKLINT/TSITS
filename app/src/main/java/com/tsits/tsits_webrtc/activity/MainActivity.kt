@@ -22,11 +22,9 @@ class MainActivity : AppCompatActivity(){
     private var TAG = "MainActivity"
     private var i = 0
 
-    //定义数据链表
-    var list = ArrayList<String>()
 
     //由AIDL文件生成的Java类
-    private var data: aidl_Data? = null
+//    private var data: aidl_Data? = null
 
     //标志当前与服务端连接状况的布尔值，false为未连接，true为连接中
     private var mBound = false
@@ -183,6 +181,9 @@ class MainActivity : AppCompatActivity(){
             false
         }
     }
+
+
+
 
 
 }

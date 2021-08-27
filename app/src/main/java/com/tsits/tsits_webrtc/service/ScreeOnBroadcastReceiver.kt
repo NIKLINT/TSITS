@@ -23,6 +23,7 @@ class ScreeOnBroadcastReceiver : BroadcastReceiver() {
 //            Mode = intent.getIntExtra("setMode", 18)
 //            val jni:com.hunter.codec.ESCodecJNI
 //            switchEsMode(Mode)
+//
 //            val backtoApp=Intent("com.TSITS.AudioService.setMode")
 //            backtoApp?.setPackage(CALLBACK_PACKAGE)
 //            backtoApp?.putExtra("setMode", Mode)
@@ -31,13 +32,13 @@ class ScreeOnBroadcastReceiver : BroadcastReceiver() {
 //        }
 //        Log.d("AudioReceiver", "Audio Mode")
 //        if (intent.hasExtra("getMode")){
-//            val jni = ESCodecJNI1()
-//            Mode = ESCodecJNI1.getEsMode()
-//            val backtoApp=Intent("com.TSITS.AudioService.setMode")
+//            val jni = ESCodecJNI()
+//            Mode = ESCodecJNI.getEsMode()
+//            val backtoApp=Intent("com.TSITS.AudioService.getMode")
 //            backtoApp?.setPackage(CALLBACK_PACKAGE)
-//            backtoApp?.putExtra("setMode", Mode)
+//            backtoApp?.putExtra("getMode", Mode)
 //            context?.sendBroadcast(backtoApp)
-//            Toast.makeText(context, "Audio Mode Set To :$Mode", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Audio Mode get To :$Mode", Toast.LENGTH_LONG).show()
 //        }
 
     }
