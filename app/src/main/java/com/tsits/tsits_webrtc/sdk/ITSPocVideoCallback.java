@@ -7,6 +7,7 @@ import com.tsits.pocvideosdk.Stru_GroupInfo;
 import java.util.List;
 
 public interface ITSPocVideoCallback {
+
     void TSPocVideoCallback_TestFun(String str);
 
     /**

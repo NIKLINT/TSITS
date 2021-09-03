@@ -48,7 +48,7 @@
         <EditText
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/editText"
+            android:id="@+id/account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="160dp"
@@ -60,7 +60,7 @@
             android:singleLine="true"
             android:textColorHint="@color/dark_blue"
             android:textCursorDrawable="@color/pink"
-            app:layout_constraintBottom_toTopOf="@+id/editText2"
+            app:layout_constraintBottom_toTopOf="@+id/password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -70,7 +70,7 @@
         <EditText
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/editText2"
+            android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="60dp"
@@ -84,7 +84,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textView16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText">
+            app:layout_constraintTop_toBottomOf="@+id/account">
 
         </EditText>
 
@@ -104,7 +104,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/password"></Button>
 
         <TextView
             android:id="@+id/textView17"

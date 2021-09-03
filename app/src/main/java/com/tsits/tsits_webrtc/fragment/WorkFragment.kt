@@ -30,13 +30,12 @@ class WorkFragment() : Fragment() {
     }
 
 
-
-
     private fun HideBottomNavigation() {
         toolbar_navigation?.setOnClickListener {
             var intent = Intent(context!!, VoiceCallActivity::class.java)
             context?.startActivity(intent)
         }
+
 
 
 

@@ -11,15 +11,35 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tsits.pocvideosdk.Stru_FriendInfo
+import com.tsits.pocvideosdk.Stru_GroupInfo
 import com.tsits.tsits_webrtc.R
 import com.tsits.tsits_webrtc.activity.GroupDetailActivity
 import com.tsits.tsits_webrtc.adapter.ContantRvAdapter
 import com.tsits.tsits_webrtc.entity.Contant
 import com.tsits.tsits_webrtc.entity.ContantTitle
+import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
+import com.tsits.tsits_webrtc.sdk.TSPocVideo
 import kotlinx.android.synthetic.main.fragment_group.*
 
 
 class GroupFragment : Fragment() {
+//    private lateinit var stru_friendInfoList:List<Stru_FriendInfo>
+//    private lateinit var mITSPocVideoCallback: ITSPocVideoCallback
+//    private lateinit var stru_groupInfos:List<Stru_GroupInfo>
+//    init {
+//        getFriendsList()
+//        getGroupList()
+//    }
+//
+//    private fun getFriendsList() {
+//      return mITSPocVideoCallback.Friend_List(stru_friendInfoList)
+//    }
+//
+//    private fun getGroupList(){
+//       return mITSPocVideoCallback.Group_List(stru_groupInfos)
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
