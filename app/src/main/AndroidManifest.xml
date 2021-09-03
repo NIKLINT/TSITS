@@ -22,15 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:replace="android:appComponentFactory">
-        <service
-            android:name=".service.ChannelService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name ="com.tsits.tsits_webrtc.AIDL"/>
-            </intent-filter>
-        </service>
-
         <activity
             android:name=".fragment.MessageTalkingRoomFragment"
             tools:ignore="Instantiatable" />
@@ -47,6 +38,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.AidlService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="service.calc" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".service.StartupBroadcast"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="arui.alarm.action" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.CycleBroadcast"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

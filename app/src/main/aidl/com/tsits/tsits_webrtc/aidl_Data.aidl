@@ -5,10 +5,8 @@ package com.tsits.tsits_webrtc;
 // Declare any non-default types here with import statements
 
 interface aidl_Data {
-//     //查询数据
-//      List<Int> getMode();
+
  int getMode ();
-     //添加数据
-//     void setMode(Int mode);
- int setMode (int mode);
+
+ int setMode (int set);
 }
