@@ -2,19 +2,26 @@ package com.tsits.tsits_webrtc.activity
 
 import android.content.*
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.*
 import com.tsits.tsits_webrtc.fragment.*
+import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
+import com.tsits.tsits_webrtc.utils.VibrateUtils
 import kotlinx.android.synthetic.main.activity_group_details.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_message.*
+import kotlinx.android.synthetic.main.fragment_video_chat.*
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     private var TAG = "MainActivity"
     private var i = 0
+//    val itsPocVideoCallback:ITSPocVideoCallback?=null
+    var isCallIn:Boolean=false
+
 
     private var groupFragment: GroupFragment? = null
     private var messageFragment: MessageFragment? = null
@@ -27,7 +34,7 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        whichIsCliclk()
+        whichIsClick()
 
         supportActionBar?.hide()  //隐藏顶部状态栏
         groupFragment = GroupFragment()
@@ -36,6 +43,8 @@ class MainActivity : AppCompatActivity(){
         mapFragment = MapFragment()
         workFragment = WorkFragment()
         groupFragment?.let { its -> loadFragment(its) }
+
+//        callCreateTurnToWindows()
     }
 
     //载入Fragment
@@ -56,17 +65,8 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     //按钮点击事件
-    fun whichIsCliclk() {
+    fun whichIsClick() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.material_group -> {
@@ -103,5 +103,20 @@ class MainActivity : AppCompatActivity(){
             false
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+
+//    fun callCreateTurnToWindows(){
+//        val intent= Intent(this,VideoCallActivity::class.java)
+//        startActivity(intent)
+//    }
 
 }

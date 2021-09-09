@@ -58,7 +58,9 @@ public class TSPocVideo implements TSPocVideoSDK {
      * @return 返回值
      */
     @Override
-    public Stru_DefaltReturn Init(int locationDeviceID, String esn, String sVersion, Stru_JanusService stru_janusService, Stru_TSRTCService stru_tsrtcService, Stru_XMPPService stru_xmppService, Stru_GPSSetting stru_gpsSetting) {
+    public Stru_DefaltReturn Init(int locationDeviceID, String esn, String sVersion
+            , Stru_JanusService stru_janusService, Stru_TSRTCService stru_tsrtcService
+            , Stru_XMPPService stru_xmppService, Stru_GPSSetting stru_gpsSetting) {
         return null;
     }
 
@@ -191,6 +193,8 @@ public class TSPocVideo implements TSPocVideoSDK {
     public void Friend_AddorDelete(int deviceID, byte isAdd) {
 
     }
+
+
 
 
 //    /**

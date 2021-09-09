@@ -24,16 +24,47 @@
             android:textSize="20sp"></TextView>
 
         <ImageView
-            android:id="@+id/toolbar_navigation"
+            android:id="@+id/toolbar_navigation_work"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbarSize="60dp"
             android:layout_gravity="right|top"
             android:layout_marginRight="10dp"
+            android:scrollbarSize="60dp"
             android:src="@drawable/ic_menu" />
-
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <EditText
+            android:id="@+id/change_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Edit Your New Name"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
+
+        <Button
+            android:id="@+id/change_name_button"
+            android:layout_width="371dp"
+            android:layout_height="wrap_content"
+            android:hint="Change Your Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_name">
+
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

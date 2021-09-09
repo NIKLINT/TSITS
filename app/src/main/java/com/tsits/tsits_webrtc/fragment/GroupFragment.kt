@@ -24,22 +24,6 @@ import kotlinx.android.synthetic.main.fragment_group.*
 
 
 class GroupFragment : Fragment() {
-//    private lateinit var stru_friendInfoList:List<Stru_FriendInfo>
-//    private lateinit var mITSPocVideoCallback: ITSPocVideoCallback
-//    private lateinit var stru_groupInfos:List<Stru_GroupInfo>
-//    init {
-//        getFriendsList()
-//        getGroupList()
-//    }
-//
-//    private fun getFriendsList() {
-//      return mITSPocVideoCallback.Friend_List(stru_friendInfoList)
-//    }
-//
-//    private fun getGroupList(){
-//       return mITSPocVideoCallback.Group_List(stru_groupInfos)
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -54,8 +38,8 @@ class GroupFragment : Fragment() {
     }
 
     private fun turntoLogin() {
-        toolbar_navigation_group.setOnClickListener(){
-            var intent=Intent(context!!,GroupDetailActivity::class.java)
+        toolbar_navigation_group.setOnClickListener() {
+            var intent = Intent(context!!, GroupDetailActivity::class.java)
             context?.startActivity(intent)
         }
     }
@@ -73,21 +57,35 @@ class GroupFragment : Fragment() {
 
     private fun getData(): List<Any> {
         val dataList = ArrayList<Any>()
-        for (tindex in 0 until 3) {
-            dataList.add(ContantTitle("title$tindex"))
             for (index in 0 until 5) {
                 dataList.add(
                     Contant(
-                        "https://img1.baidu.com/it/u=1502334019,908245671&fm=26&fmt=auto&gp=0.jpg",
+                        "id:$index",
                         "name1:$index",
                         "phone2:$index"
                     )
                 )
             }
-        }
         return dataList
     }
 
+
+//    private fun getData(): List<Any> {
+//        val dataList = ArrayList<Any>()
+//        for (tindex in 0 until 3) {
+//            dataList.add(ContantTitle("title$tindex"))
+//            for (index in 0 until 5) {
+//                dataList.add(
+//                    Contant(
+//                        "https://img1.baidu.com/it/u=1502334019,908245671&fm=26&fmt=auto&gp=0.jpg",
+//                        "name1:$index",
+//                        "phone2:$index"
+//                    )
+//                )
+//            }
+//        }
+//        return dataList
+//    }
 
 
 }

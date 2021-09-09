@@ -7,11 +7,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
+import com.tsits.tsits_webrtc.sdk.TSPocVideo
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_microphone.*
 
 
 class MicrophoneFragment : Fragment(), View.OnTouchListener {
+
+//    lateinit var tsPocVideo: TSPocVideo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,13 +42,15 @@ class MicrophoneFragment : Fragment(), View.OnTouchListener {
                     iv_green_background.visibility = View.VISIBLE
                     iv_green_background2.visibility = View.VISIBLE
 
-
+//                    tsPocVideo.Call_PttonOrPttoff(true)
                 }
                 MotionEvent.ACTION_UP -> {
                     tv_talking_state.visibility=View.GONE
                     iv_talking_state.visibility=View.GONE
                     iv_green_background.visibility = View.GONE
                     iv_green_background2.visibility = View.GONE
+
+//                    tsPocVideo.Call_PttonOrPttoff(false)
                 }
             }
             return true
@@ -56,12 +61,16 @@ class MicrophoneFragment : Fragment(), View.OnTouchListener {
                     iv_talking_state.visibility=View.VISIBLE
                     iv_red_background.visibility = View.VISIBLE
                     iv_red_background2.visibility = View.VISIBLE
+
+//                    tsPocVideo.Call_PttonOrPttoff(true)
                 }
                 MotionEvent.ACTION_UP -> {
                     tv_talking_state.visibility=View.GONE
                     iv_talking_state.visibility=View.GONE
                     iv_red_background.visibility = View.GONE
                     iv_red_background2.visibility = View.GONE
+
+//                    tsPocVideo.Call_PttonOrPttoff(false)
                 }
             }
         }

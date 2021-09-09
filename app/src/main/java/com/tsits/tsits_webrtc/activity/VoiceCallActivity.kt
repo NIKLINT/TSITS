@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.tsits.tsits_webrtc.R
+import kotlinx.android.synthetic.main.fragment_voice_chat.*
 import kotlinx.android.synthetic.main.fragment_work.*
 
 class VoiceCallActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class VoiceCallActivity : AppCompatActivity() {
 
     }
     private fun turnToVideo() {
-        toolbar_navigation?.setOnClickListener {
+        toolbar_navigation_voice_chat?.setOnClickListener {
             var intent = Intent(this!!, VideoCallActivity::class.java)
             this?.startActivity(intent)
         }

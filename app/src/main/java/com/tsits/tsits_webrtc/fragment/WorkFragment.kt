@@ -1,43 +1,40 @@
 package com.tsits.tsits_webrtc.fragment
 
-import android.annotation.SuppressLint
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.baidu.mapapi.SDKInitializer
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.activity.VoiceCallActivity
-import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
+import com.tsits.tsits_webrtc.sdk.TSPocVideo
 import kotlinx.android.synthetic.main.fragment_work.*
 
+/**
+ * @author YUAN
+ * @description:
+ * @date :2021/9/9 16:21
+ */
+class WorkFragment : Fragment() {
 
-class WorkFragment() : Fragment() {
+//    lateinit var tsPocVideo: TSPocVideo
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_work, container, false)
+        return inflater.inflate(R.layout.fragment_work, container,false)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        HideBottomNavigation()
-    }
-
-
-    private fun HideBottomNavigation() {
-        toolbar_navigation?.setOnClickListener {
-            var intent = Intent(context!!, VoiceCallActivity::class.java)
-            context?.startActivity(intent)
-        }
-
-
-
 
     }
+
+//    fun changeNickName(){
+//        change_name_button.setOnClickListener(View.OnClickListener {
+//            tsPocVideo.Device_ChangeInfo(change_name.text.toString()) })
+//    }
 }
