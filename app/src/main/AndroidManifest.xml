@@ -3,7 +3,6 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tsits.tsits_webrtc">
-
     <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
     <dist:module dist:instant="true" />
 
@@ -13,7 +12,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".Application"
@@ -25,6 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".sdk.TSXMPPClient"></activity>
         <activity
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="adjustResize">
@@ -38,11 +38,8 @@
         <activity android:name=".activity.VideoCallActivity" />
         <activity android:name=".activity.VoiceCallActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".ButtonPressActivity" />
-<!--        <activity android:name=".manager.ITSPocVideoReceive" />-->
-<!--        <activity android:name=".manager.ITSPocVideoSend" />-->
-
-
+        <activity android:name=".ButtonPressActivity" /> <!-- <activity android:name=".manager.ITSPocVideoReceive" /> -->
+        <!-- <activity android:name=".manager.ITSPocVideoSend" /> -->
         <service
             android:name=".service.AidlService"
             android:enabled="true"
@@ -60,7 +57,6 @@
                 <action android:name="arui.alarm.action" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".service.CycleBroadcast"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
