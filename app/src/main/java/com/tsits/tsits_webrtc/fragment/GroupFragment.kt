@@ -18,8 +18,8 @@ import com.tsits.tsits_webrtc.activity.GroupDetailActivity
 import com.tsits.tsits_webrtc.adapter.ContantRvAdapter
 import com.tsits.tsits_webrtc.entity.Contant
 import com.tsits.tsits_webrtc.entity.ContantTitle
-import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
-import com.tsits.tsits_webrtc.sdk.TSPocVideo
+//import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
+//import com.tsits.tsits_webrtc.sdk.TSPocVideo
 import kotlinx.android.synthetic.main.fragment_group.*
 
 
@@ -49,43 +49,43 @@ class GroupFragment : Fragment() {
         Log.d("message", "---------------->initRecyclerView datalist size:${dataList?.size}")
         val adapter = ContantRvAdapter(context!!)
         recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+            val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = adapter
         adapter.setData(dataList)
     }
 
-    private fun getData(): List<Any> {
-        val dataList = ArrayList<Any>()
-            for (index in 0 until 5) {
-                dataList.add(
-                    Contant(
-                        "id:$index",
-                        "name1:$index",
-                        "phone2:$index"
-                    )
-                )
-            }
-        return dataList
-    }
-
-
 //    private fun getData(): List<Any> {
 //        val dataList = ArrayList<Any>()
-//        for (tindex in 0 until 3) {
-//            dataList.add(ContantTitle("title$tindex"))
 //            for (index in 0 until 5) {
 //                dataList.add(
 //                    Contant(
-//                        "https://img1.baidu.com/it/u=1502334019,908245671&fm=26&fmt=auto&gp=0.jpg",
+//                        "id:$index",
 //                        "name1:$index",
 //                        "phone2:$index"
 //                    )
 //                )
 //            }
-//        }
 //        return dataList
 //    }
+
+
+    private fun getData(): List<Any> {
+        val dataList = ArrayList<Any>()
+        for (tindex in 0 until 3) {
+            dataList.add(ContantTitle("title$tindex"))
+            for (index in 0 until 5) {
+                dataList.add(
+                    Contant(
+                        "https://img1.baidu.com/it/u=1502334019,908245671&fm=26&fmt=auto&gp=0.jpg",
+                        "name1:$index",
+                        "phone2:$index"
+                    )
+                )
+            }
+        }
+        return dataList
+    }
 
 
 }

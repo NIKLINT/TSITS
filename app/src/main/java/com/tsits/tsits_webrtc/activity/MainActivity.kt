@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.*
 import com.tsits.tsits_webrtc.fragment.*
-import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
-import com.tsits.tsits_webrtc.utils.VibrateUtils
+//import com.tsits.tsits_webrtc.utils.VibrateUtils
 import kotlinx.android.synthetic.main.activity_group_details.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_message.*
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private var TAG = "MainActivity"
     private var i = 0
-//    val itsPocVideoCallback:ITSPocVideoCallback?=null
     var isCallIn:Boolean=false
 
 
@@ -98,7 +96,6 @@ class MainActivity : AppCompatActivity() {
                     workFragment?.let { its -> loadFragment(its) }
                     return@setOnNavigationItemSelectedListener true
                 }
-
             }
             false
         }

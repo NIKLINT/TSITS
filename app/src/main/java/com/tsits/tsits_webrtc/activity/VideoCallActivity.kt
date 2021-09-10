@@ -12,8 +12,7 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo
 
 class VideoCallActivity : AppCompatActivity() {
 
-//    val tsPocVideo: TSPocVideo? = null
-//    val iTSPocVideoCallback:ITSPocVideoCallback?=null
+    val tsPocVideo: TSPocVideo? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
