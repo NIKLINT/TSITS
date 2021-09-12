@@ -3,51 +3,21 @@ package com.tsits.tsits_webrtc.sdk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class TSXMPPClient extends AppCompatActivity {
+
+    private ITSPocVideoCallback itsPocVideoCallback;
+    private String[] strings=new String[]{"sa","2","1"};
+    private int[] ints=new int[]{1,1,1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TSPocVideo.getInstance().DemoTest(1,strings,ints);
+        TSPocVideo.getInstance().DemoTestCallback();
 
     }
-
-    /**
-     * ----测试代码 ----start
-     */
-    String testString = " This is TSPocVideo.";
-
-    public void DemoTest(int position, String[] strings, int[] ints) {
-
-//        Log4jUtils.d(this, "DemoTest pos = "+ position);
-//        Log4jUtils.d(this,TSXMPPClient.getInstance().getTestString());
-        TSXMPPClient.getInstance().DemoTest(position, strings, ints);
-//        Log4jUtils.d(this, "DemoTest pos = "+ position + "end!");
-
-
-    }
-
-    public void DemoTestCallback() {
-
-        //调用回调
-        if (itsPocVideoCallback != null) {
-            itsPocVideoCallback.TSPocVideoCallback_TestFun("TSPocVideoCallback_TestFun");
-        }
-
-        TSXMPPClient.setCallBack(tsxmppClientCallback);
-        TSXMPPClient.getInstance().DemoTestCallback();
-
-    }
-
-    public String getTestString() {
-        return testString;
-    }
-
-    public void setTestString(String testString) {
-        this.testString = testString;
-    }
-    /** ----测试代码 ----end */
-
 
 
 }

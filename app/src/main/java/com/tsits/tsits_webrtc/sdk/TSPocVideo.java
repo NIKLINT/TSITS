@@ -1,5 +1,7 @@
 package com.tsits.tsits_webrtc.sdk;
 
+import android.util.Log;
+
 import com.tsits.pocvideosdk.Stru_DefaltReturn;
 import com.tsits.pocvideosdk.Stru_GPSData;
 import com.tsits.pocvideosdk.Stru_GPSSetting;
@@ -13,6 +15,7 @@ import com.tsits.pocvideosdk.main.TSXMPPClientCallback;
 import java.util.List;
 
 public class TSPocVideo implements TSPocVideoSDK {
+    private static final String TAG="this";
     private static ITSPocVideoCallback itsPocVideoCallback = null;
 
     private TSXMPPClientCallback tsxmppClientCallback = new TSXMPPClientCallback();
@@ -204,10 +207,10 @@ public class TSPocVideo implements TSPocVideoSDK {
 
     public void DemoTest(int position, String[] strings, int[] ints) {
 
-//        Log4jUtils.d(this, "DemoTest pos = "+ position);
-//        Log4jUtils.d(this,TSXMPPClient.getInstance().getTestString());
-        TSXMPPClient.getInstance().DemoTest(position, strings, ints);
-//        Log4jUtils.d(this, "DemoTest pos = "+ position + "end!");
+        Log.d(TAG, "DemoTest pos = "+ position);
+        Log.d(TAG,TSPocVideo.getInstance().getTestString());
+        TSPocVideo.getInstance().DemoTest(position, strings, ints);
+        Log.d(TAG, "DemoTest pos = "+ position + "end!");
 
 
     }
@@ -219,8 +222,8 @@ public class TSPocVideo implements TSPocVideoSDK {
             itsPocVideoCallback.TSPocVideoCallback_TestFun("TSPocVideoCallback_TestFun");
         }
 
-        TSXMPPClient.setCallBack(tsxmppClientCallback);
-        TSXMPPClient.getInstance().DemoTestCallback();
+        TSPocVideo.setCallBack(itsPocVideoCallback);
+        TSPocVideo.getInstance().DemoTestCallback();
 
     }
 

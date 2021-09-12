@@ -11,7 +11,6 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo
  */
 class ITSPocVideoSend : AppCompatActivity() {
 
-    lateinit var tsPocVideo: TSPocVideo
     lateinit var hardwareInformationUtil: HardwareInformationUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +23,6 @@ class ITSPocVideoSend : AppCompatActivity() {
 //        val locationDeviceID: Int =
 //            hardwareInformationUtil.locationDeviceID(this).toString().toInt()
 //        val systemVersion=hardwareInformationUtil.systemVersion
-//        tsPocVideo.Init(locationDeviceID, fingerprint,systemVersion,)
+//        TSPocVideo.getInstance().Init(locationDeviceID, fingerprint,systemVersion,)
 //    }
 }
