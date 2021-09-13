@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_group.*
 import java.text.FieldPosition
 
 
-class GroupFragment : Fragment(),OnItemClickListener{
+class GroupFragment : Fragment(), OnItemClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -43,9 +43,9 @@ class GroupFragment : Fragment(),OnItemClickListener{
     private fun initRecyclerView() {
         var dataList = getData()
         Log.d("message", "---------------->initRecyclerView datalist size:${dataList?.size}")
-        val adapter = ContantRvAdapter(context!!,this)
+        val adapter = ContantRvAdapter(context!!, this)
         recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+        val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = adapter
         adapter.setData(dataList)
@@ -72,17 +72,19 @@ class GroupFragment : Fragment(),OnItemClickListener{
     }
 
 
-
     /*
         * 跳转到GroupDetail
         * */
     private fun turntoGroupDetail(position: Int) {
-            val intent = Intent(context!!, GroupDetailActivity::class.java)
-            startActivityForResult(intent,1001)
+
+        val intent = Intent(context!!, GroupDetailActivity::class.java)
+        val bundle = Bundle()
+        bundle.putString(getText().toString())
+        startActivityForResult(intent, 1001)
     }
 
     override fun OnItemClick(view: View, position: Int) {
-        Toast.makeText(activity,"YOU Click is $view $position",Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "YOU Click is $view $position", Toast.LENGTH_SHORT).show()
         turntoGroupDetail(position)
     }
 
