@@ -7,13 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tsits.pocvideosdk.Stru_FriendInfo
-import com.tsits.pocvideosdk.Stru_GroupInfo
 import com.tsits.tsits_webrtc.R
+import com.tsits.tsits_webrtc.`interface`.OnItemClickListener
 import com.tsits.tsits_webrtc.activity.GroupDetailActivity
 import com.tsits.tsits_webrtc.adapter.ContantRvAdapter
 import com.tsits.tsits_webrtc.entity.Contant
@@ -21,9 +21,10 @@ import com.tsits.tsits_webrtc.entity.ContantTitle
 //import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
 //import com.tsits.tsits_webrtc.sdk.TSPocVideo
 import kotlinx.android.synthetic.main.fragment_group.*
+import java.text.FieldPosition
 
 
-class GroupFragment : Fragment() {
+class GroupFragment : Fragment(),OnItemClickListener{
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,20 +35,15 @@ class GroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        turntoLogin()
     }
 
-    private fun turntoLogin() {
-        toolbar_navigation_group.setOnClickListener() {
-            var intent = Intent(context!!, GroupDetailActivity::class.java)
-            context?.startActivity(intent)
-        }
-    }
-
+    /*
+    * 绑定列表
+    * */
     private fun initRecyclerView() {
         var dataList = getData()
         Log.d("message", "---------------->initRecyclerView datalist size:${dataList?.size}")
-        val adapter = ContantRvAdapter(context!!)
+        val adapter = ContantRvAdapter(context!!,this)
         recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             val divider = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(divider)
@@ -55,21 +51,9 @@ class GroupFragment : Fragment() {
         adapter.setData(dataList)
     }
 
-//    private fun getData(): List<Any> {
-//        val dataList = ArrayList<Any>()
-//            for (index in 0 until 5) {
-//                dataList.add(
-//                    Contant(
-//                        "id:$index",
-//                        "name1:$index",
-//                        "phone2:$index"
-//                    )
-//                )
-//            }
-//        return dataList
-//    }
-
-
+    /*
+    * 取得列表
+    * */
     private fun getData(): List<Any> {
         val dataList = ArrayList<Any>()
         for (tindex in 0 until 3) {
@@ -87,5 +71,19 @@ class GroupFragment : Fragment() {
         return dataList
     }
 
+
+
+    /*
+        * 跳转到GroupDetail
+        * */
+    private fun turntoGroupDetail(position: Int) {
+            val intent = Intent(context!!, GroupDetailActivity::class.java)
+            startActivityForResult(intent,1001)
+    }
+
+    override fun OnItemClick(view: View, position: Int) {
+        Toast.makeText(activity,"YOU Click is $view $position",Toast.LENGTH_SHORT).show()
+        turntoGroupDetail(position)
+    }
 
 }

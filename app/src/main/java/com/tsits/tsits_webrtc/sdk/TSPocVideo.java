@@ -200,40 +200,40 @@ public class TSPocVideo implements TSPocVideoSDK {
 
 
 
-    /**
-     * ----测试代码 ----start
-     */
-    String testString = " This is TSPocVideo.";
-
-    public void DemoTest(int position, String[] strings, int[] ints) {
-
-        Log.d(TAG, "DemoTest pos = "+ position);
-        Log.d(TAG,TSPocVideo.getInstance().getTestString());
-        TSPocVideo.getInstance().DemoTest(position, strings, ints);
-        Log.d(TAG, "DemoTest pos = "+ position + "end!");
-
-
-    }
-
-    public void DemoTestCallback() {
-
-        //调用回调
-        if (itsPocVideoCallback != null) {
-            itsPocVideoCallback.TSPocVideoCallback_TestFun("TSPocVideoCallback_TestFun");
-        }
-
-        TSPocVideo.setCallBack(itsPocVideoCallback);
-        TSPocVideo.getInstance().DemoTestCallback();
-
-    }
-
-    public String getTestString() {
-        return testString;
-    }
-
-    public void setTestString(String testString) {
-        this.testString = testString;
-    }
-    /** ----测试代码 ----end */
+//    /**
+//     * ----测试代码 ----start
+//     */
+//    String testString = " This is TSPocVideo.";
+//
+//    public void DemoTest(int position, String[] strings, int[] ints) {
+//
+//        Log.d(TAG, "DemoTest pos = "+ position);
+//        Log.d(TAG,TSPocVideo.getInstance().getTestString());
+//        TSPocVideo.getInstance().DemoTest(position, strings, ints);
+//        Log.d(TAG, "DemoTest pos = "+ position + "end!");
+//
+//
+//    }
+//
+//    public void DemoTestCallback() {
+//
+//        //调用回调
+//        if (itsPocVideoCallback != null) {
+//            itsPocVideoCallback.TSPocVideoCallback_TestFun("TSPocVideoCallback_TestFun");
+//        }
+//
+//        TSPocVideo.setCallBack(itsPocVideoCallback);
+//        TSPocVideo.getInstance().DemoTestCallback();
+//
+//    }
+//
+//    public String getTestString() {
+//        return testString;
+//    }
+//
+//    public void setTestString(String testString) {
+//        this.testString = testString;
+//    }
+//    /** ----测试代码 ----end */
 
 }

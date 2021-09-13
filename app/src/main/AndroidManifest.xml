@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".sdk.TSXMPPClient"></activity>
+        <activity android:name=".sdk.TSXMPPClient" />
         <activity
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="adjustResize">
@@ -34,11 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GroupDetailActivity" />
         <activity android:name=".activity.VideoCallActivity" />
         <activity android:name=".activity.VoiceCallActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".ButtonPressActivity" /> <!-- <activity android:name=".manager.ITSPocVideoReceive" /> -->
+        <activity android:name=".ButtonPressActivity" />
+        <activity android:name=".activity.GroupDetailActivity" /> <!-- <activity android:name=".manager.ITSPocVideoReceive" /> -->
         <!-- <activity android:name=".manager.ITSPocVideoSend" /> -->
         <service
             android:name=".service.AidlService"

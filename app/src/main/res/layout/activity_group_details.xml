@@ -20,7 +20,7 @@
             android:textSize="20sp"></TextView>
 
         <ImageView
-            android:id="@+id/toolbar_navigation"
+            android:id="@+id/toolbar_navigation_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|top"
@@ -94,8 +94,9 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/view3" />
 
+
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/phone_call_detail_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
@@ -108,18 +109,19 @@
         app:srcCompat="@drawable/ic_circle_green" />
 
     <ImageButton
-        android:id="@+id/imageButton12"
+        android:id="@+id/phone_call_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton9"
-        app:layout_constraintStart_toStartOf="@+id/imageButton9"
-        app:layout_constraintTop_toTopOf="@+id/imageButton9"
+        app:layout_constraintBottom_toBottomOf="@+id/phone_call_detail_background"
+        app:layout_constraintEnd_toEndOf="@+id/phone_call_detail_background"
+        app:layout_constraintStart_toStartOf="@+id/phone_call_detail_background"
+        app:layout_constraintTop_toTopOf="@+id/phone_call_detail_background"
         app:srcCompat="@drawable/ic_icon_feather_phone" />
 
+
     <ImageButton
-        android:id="@+id/imageButton13"
+        android:id="@+id/message_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -138,14 +140,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton13"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton13"
-        app:layout_constraintStart_toStartOf="@+id/imageButton13"
-        app:layout_constraintTop_toTopOf="@+id/imageButton13"
+        app:layout_constraintBottom_toBottomOf="@+id/message_detail"
+        app:layout_constraintEnd_toEndOf="@+id/message_detail"
+        app:layout_constraintStart_toStartOf="@+id/message_detail"
+        app:layout_constraintTop_toTopOf="@+id/message_detail"
         app:srcCompat="@drawable/ic_icon_feather_message_square" />
 
     <ImageButton
-        android:id="@+id/imageButton15"
+        android:id="@+id/video_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
@@ -162,15 +164,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton15"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton15"
+        app:layout_constraintBottom_toBottomOf="@+id/video_detail"
+        app:layout_constraintEnd_toEndOf="@+id/video_detail"
 
-        app:layout_constraintStart_toStartOf="@+id/imageButton15"
-        app:layout_constraintTop_toTopOf="@+id/imageButton15"
+        app:layout_constraintStart_toStartOf="@+id/video_detail"
+        app:layout_constraintTop_toTopOf="@+id/video_detail"
         app:srcCompat="@drawable/ic_icon_feather_video" />
 
     <ImageButton
-        android:id="@+id/imageButton17"
+        android:id="@+id/GPS_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
@@ -187,11 +189,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton17"
+        app:layout_constraintBottom_toBottomOf="@+id/GPS_detail"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton17"
-        app:layout_constraintStart_toStartOf="@+id/imageButton17"
-        app:layout_constraintTop_toTopOf="@+id/imageButton17"
+        app:layout_constraintEnd_toEndOf="@+id/GPS_detail"
+        app:layout_constraintStart_toStartOf="@+id/GPS_detail"
+        app:layout_constraintTop_toTopOf="@+id/GPS_detail"
         app:srcCompat="@drawable/ic_icon_metro_location" />
 
 

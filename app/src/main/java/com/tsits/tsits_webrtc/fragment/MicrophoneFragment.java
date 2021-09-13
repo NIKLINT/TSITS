@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.tsits.tsits_webrtc.R;
+import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback;
 import com.tsits.tsits_webrtc.sdk.TSPocVideo;
 
 /**
@@ -22,6 +23,7 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo;
  * @date :2021/9/7 17:35
  */
 public class MicrophoneFragment extends Fragment implements View.OnTouchListener {
+    private ITSPocVideoCallback itsPocVideoCallback;
 
     private ImageView imageView5 = null;
     private ImageView imageView6 = null;
@@ -70,7 +72,8 @@ public class MicrophoneFragment extends Fragment implements View.OnTouchListener
                     iv_green_background2.setVisibility(View.VISIBLE);
                     Log.d("message", "IS CLICK!!!!---------------------------->");
 
-                    TSPocVideo.getInstance().Call_PttonOrPttoff(true);
+//                    TSPocVideo.getInstance().Call_PttonOrPttoff(true);
+
                     break;
                 case MotionEvent.ACTION_UP:
                     iv_talking_state.setVisibility(View.GONE);

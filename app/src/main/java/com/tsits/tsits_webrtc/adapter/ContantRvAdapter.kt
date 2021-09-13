@@ -13,11 +13,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.tsits.tsits_webrtc.R
+import com.tsits.tsits_webrtc.`interface`.OnItemClickListener
 import com.tsits.tsits_webrtc.entity.Contant
 import com.tsits.tsits_webrtc.entity.ContantTitle
 import kotlinx.android.synthetic.main.item_group.view.*
 
-class ContantRvAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickListener?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mDataList: MutableList<Any> = ArrayList()
 
@@ -26,6 +27,8 @@ class ContantRvAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vie
     override fun getItemViewType(position: Int): Int {
         return if (mDataList[position] is ContantTitle) 0 else 1
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == 0) {
@@ -39,6 +42,12 @@ class ContantRvAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vie
         val data = mDataList[position]
         if (holder is TitleViewHolder && data is ContantTitle) {
             holder?.title?.text = data.title
+
+            mOnItemClickLitener?.let {
+                holder?.itemView?.setOnClickListener {
+                    mOnItemClickLitener.OnItemClick(holder?.itemView,position);
+                }
+            }
         } else if (holder is ItemViewHolder && data is Contant) {
             holder?.image?.let {
                 Glide
@@ -49,6 +58,12 @@ class ContantRvAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vie
             }
             holder?.name?.text = data?.name
             holder?.phone?.text = data?.phone
+
+            mOnItemClickLitener?.let {
+                holder?.itemView?.setOnClickListener {
+                    mOnItemClickLitener.OnItemClick(holder?.itemView,position);
+                }
+            }
         }
     }
 

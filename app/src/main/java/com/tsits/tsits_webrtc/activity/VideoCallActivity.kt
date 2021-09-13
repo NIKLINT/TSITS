@@ -12,9 +12,6 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo
 
 class VideoCallActivity : AppCompatActivity() {
 
-    val tsPocVideo: TSPocVideo? = null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_video_chat)

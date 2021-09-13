@@ -8,13 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.activity.GroupDetailActivity
 import com.tsits.tsits_webrtc.activity.LoginActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_group.*
 import kotlinx.android.synthetic.main.fragment_map.*
-import kotlinx.android.synthetic.main.fragment_message.*
-import kotlinx.android.synthetic.main.fragment_microphone.*
 
 
 class MapFragment : Fragment() {

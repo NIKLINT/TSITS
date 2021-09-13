@@ -41,11 +41,13 @@ class ITSPocVideoReceive : AppCompatActivity(), ITSPocVideoCallback {
         killState: Byte,
         priority: Byte,
     ) {
-        TODO("Not yet implemented")
+
     }
 
-    override fun Friend_List(stru_friendInfoList: MutableList<Stru_FriendInfo>?) {
+    override fun Friend_List(stru_friendInfoList: List<Stru_FriendInfo>?){
+        if (stru_friendInfoList != null) {
 
+        }
     }
 
     override fun Friend_AddorDelete(
