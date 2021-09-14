@@ -1,22 +1,19 @@
 package com.tsits.tsits_webrtc.adapter
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.`interface`.OnItemClickListener
+import com.tsits.tsits_webrtc.inter_face.OnItemClickListener
 import com.tsits.tsits_webrtc.entity.Contant
 import com.tsits.tsits_webrtc.entity.ContantTitle
-import kotlinx.android.synthetic.main.item_group.view.*
 
 class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickListener?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

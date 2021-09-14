@@ -15,7 +15,7 @@ import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
  */
 class ITSPocVideoReceive : AppCompatActivity(), ITSPocVideoCallback {
 
-    lateinit var groupFragment:GroupFragment
+    lateinit var groupFragment: GroupFragment
     lateinit var hardwareInformationUtil: HardwareInformationUtil
 
     override fun TSPocVideoCallback_TestFun(str: String?) {
