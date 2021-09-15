@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +28,8 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo;
  */
 public class GroupDetailActivity extends AppCompatActivity {
     private static final String TAG = "GroupDetailActivity";
-    private ImageView phone_call_detail;
-    private ImageView phone_call_detail1;
+    private ImageButton phone_call_detail;
+    private ImageButton phone_call_detail_background;
     private ImageView toolbar_navigation_detail;
     private TextView name_details;
     private TextView phone_details;
@@ -42,7 +43,10 @@ public class GroupDetailActivity extends AppCompatActivity {
     }
 
     private void InitView() {
+//        phone_call_detail = findViewById(R.id.phone_call_detail);
+        phone_call_detail_background = findViewById(R.id.phone_call_detail_background);
         phone_call_detail = findViewById(R.id.phone_call_detail);
+        phone_call_detail.setImageResource(R.drawable.ic_icon_feather_phone);
         toolbar_navigation_detail = findViewById(R.id.toolbar_navigation_detail);
         phone_details = findViewById(R.id.phone_details);
         name_details = findViewById(R.id.name_details);
@@ -62,7 +66,7 @@ public class GroupDetailActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 1001) {
-            Log.d(TAG,"resultCode: "+resultCode+"requestCode: "+requestCode);
+            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
             String result = data.getStringExtra("getItem");
             phone_details.setText(result);
 

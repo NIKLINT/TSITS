@@ -16,9 +16,10 @@ import com.tsits.tsits_webrtc.R
 import com.tsits.tsits_webrtc.entity.Contant
 import com.tsits.tsits_webrtc.entity.ContantTitle
 import com.tsits.tsits_webrtc.entity.MessageContant
+import com.tsits.tsits_webrtc.inter_face.OnItemClickListener
 import kotlinx.android.synthetic.main.item_group.view.*
 
-class MessageContantRvAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickListener?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mDataList: MutableList<Any> = ArrayList()
 
@@ -41,6 +42,12 @@ class MessageContantRvAdapter(context: Context) : RecyclerView.Adapter<RecyclerV
         }
         holder?.group?.text = data?.group
         holder?.time?.text = data?.time
+
+            mOnItemClickLitener?.let {
+                holder?.itemView?.setOnClickListener {
+                    mOnItemClickLitener.OnItemClick(holder?.itemView,position);
+                }
+            }
     }
     }
 

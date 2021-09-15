@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="@+id/phone_call_detail_background"
         app:layout_constraintStart_toStartOf="@+id/phone_call_detail_background"
         app:layout_constraintTop_toTopOf="@+id/phone_call_detail_background"
-        app:srcCompat="@drawable/ic_icon_feather_phone" />
+         />
 
 
     <ImageButton
