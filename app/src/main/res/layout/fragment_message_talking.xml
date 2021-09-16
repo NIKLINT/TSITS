@@ -57,8 +57,6 @@
         android:id="@+id/talking_log"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="9dp"
         app:layout_constraintBottom_toTopOf="@+id/ibtn_change_input_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +72,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded_button_lilac_menu"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/talking_log"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -194,16 +192,6 @@
             app:layout_constraintTop_toTopOf="@+id/imageButton5"
             app:layout_constraintVertical_bias="0.802" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_talking_menu" />
 
         <ImageButton
             android:id="@+id/imageButton8"

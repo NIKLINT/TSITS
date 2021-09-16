@@ -2,9 +2,13 @@ package com.tsits.tsits_webrtc.activity
 
 import android.content.*
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.widget.Switch
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.GlideBuilder
 import com.tsits.tsits_webrtc.*
 import com.tsits.tsits_webrtc.fragment.*
 //import com.tsits.tsits_webrtc.utils.VibrateUtils
@@ -15,10 +19,10 @@ import kotlinx.android.synthetic.main.fragment_video_chat.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    private var firstTime:Long = 0
     private var TAG = "MainActivity"
     private var i = 0
-    var isCallIn:Boolean=false
+    var isCallIn: Boolean = false
 
 
     private var groupFragment: GroupFragment? = null
@@ -44,6 +48,8 @@ class MainActivity : AppCompatActivity() {
 
 //        callCreateTurnToWindows()
     }
+
+
 
     //载入Fragment
     private fun loadFragment(fragment: Fragment) {
@@ -109,6 +115,24 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        var waitSecondTime:Long = System.currentTimeMillis()
+        when (keyCode) {
+            KeyEvent.KEYCODE_BACK ->
+                if (waitSecondTime - firstTime > 2000) {
+                    Toast.makeText(this, "再次点击返回键退出程序", Toast.LENGTH_SHORT).show()
+                    firstTime = waitSecondTime
+                    return false
+                } else {
+                    finish()
+                    System.exit(0)
+                    return true
+                }
+        }
+        return super.onKeyUp(keyCode, event)
+    }
+
 
 
 //    fun callCreateTurnToWindows(){

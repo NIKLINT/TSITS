@@ -106,12 +106,14 @@ public class GroupFragment extends Fragment implements OnItemClickListener {
      * 携带bundle跳转到GroupDetail
      * */
     private void turntoGroupDetail(int position) {
-        Intent intent = new Intent(getContext(), GroupDetailActivity.class);
+        Intent intent = new Intent(getActivity(), GroupDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("getItem", getItem(position).toString());
 //        bundle.putString("getItem", dataList.get(position).toString())
         intent.putExtras(bundle);
-        startActivityForResult(intent, 1001);
-        Log.d(TAG,bundle.toString());
+        startActivity(intent);
+//        startActivityForResult(intent, 101);
+
     }
+
 }

@@ -62,16 +62,17 @@ public class GroupDetailActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 1001) {
-            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
-            String result = data.getStringExtra("getItem");
-            phone_details.setText(result);
-
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.d(TAG,"onActivityResult is GO ON");
+//        if (resultCode == RESULT_OK && requestCode == 101) {
+//            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
+//            String result = data.getStringExtra("getItem");
+//            Log.d(TAG, "result "+result);
+//            phone_details.setText(result);
+//        }
+//    }
 
     /*
      * 设置Dialog

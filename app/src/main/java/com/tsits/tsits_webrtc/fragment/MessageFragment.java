@@ -100,13 +100,14 @@ public class MessageFragment extends Fragment implements OnItemClickListener {
      * 携带bundle跳转到MessageTalkingRoom
      * */
     private void turnToMessageTalkingRoomActivity(int position) {
-        Intent intent = new Intent(getContext(), MessageTalkingRoomActivity.class);
+        Intent intent = new Intent(getActivity(), MessageTalkingRoomActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("getItem", getItem(position).toString());
 //        bundle.putString("getItem", dataList.get(position).toString())
         intent.putExtras(bundle);
-        startActivityForResult(intent, 1002);
-        Log.d(TAG, bundle.toString());
+        startActivity(intent);
+//        getActivity().startActivityForResult(intent, 102);
+        Log.d(TAG, bundle.toString()+"-----------------intent "+intent+"-----------------requestCode "+1002);
     }
 
 
