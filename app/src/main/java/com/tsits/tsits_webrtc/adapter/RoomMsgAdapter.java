@@ -1,5 +1,6 @@
 package com.tsits.tsits_webrtc.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.tsits.tsits_webrtc.R;
 import com.tsits.tsits_webrtc.entity.RoomMsg;
 
@@ -22,6 +26,8 @@ import java.util.List;
  */
 public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgViewHolder> {
     private List<RoomMsg> mMsgList;
+    Context context;
+
 
     @NonNull
     @Override
@@ -32,18 +38,19 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
 
     @Override
     public void onBindViewHolder(@NonNull RoomMsgViewHolder holder, int position) {
-        RoomMsg msg =mMsgList.get(position);
-        if(msg.getType()==RoomMsg.TYPE_RECEIVED){
+        RoomMsg msg = mMsgList.get(position);
+        if (msg.getType() == RoomMsg.TYPE_RECEIVED) {
+            Glide.with(context).load(msg.getRightHand()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
-        }else if(msg.getType()==RoomMsg.TYPE_SENT){
+        } else if (msg.getType() == RoomMsg.TYPE_SENT) {
+            Glide.with(context).load(msg.getRightHand()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
             holder.leftLayout.setVisibility(View.GONE);
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.rightMsg.setText(msg.getContent());
         }
     }
-
 
 
     @Override
@@ -71,7 +78,9 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
 
         }
     }
-    public RoomMsgAdapter (List<RoomMsg> msgList){
-        mMsgList = msgList;
+
+    public RoomMsgAdapter(List<RoomMsg> msgList) {
+        this.mMsgList = msgList;
+
     }
 }

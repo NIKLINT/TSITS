@@ -22,11 +22,6 @@
             android:background="@mipmap/hand1"
             ></ImageView>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <TextView
                 android:id="@+id/msg_left"
                 android:layout_width="wrap_content"
@@ -34,8 +29,6 @@
                 android:layout_gravity="center"
                 android:background="@mipmap/ic_chat_bubble_left" />
 
-
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -43,20 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/msg_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:rotation="180"
                 android:background="@mipmap/ic_chat_bubble_left" />
-
-
-        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_hand_right"
