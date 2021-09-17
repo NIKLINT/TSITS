@@ -35,7 +35,7 @@
             android:textSize="20sp"></TextView>
 
         <ImageView
-            android:id="@+id/toolbar_navigation"
+            android:id="@+id/toolbar_navigation_message_talking_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|top"
@@ -112,7 +112,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton8"
+            app:layout_constraintTop_toBottomOf="@+id/menu_fold"
             app:layout_constraintVertical_bias="0.0"></ImageButton>
 
         <TextView
@@ -194,7 +194,7 @@
 
 
         <ImageButton
-            android:id="@+id/imageButton8"
+            android:id="@+id/menu_fold"
             android:paddingTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

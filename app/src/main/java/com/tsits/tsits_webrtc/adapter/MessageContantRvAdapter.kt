@@ -19,36 +19,37 @@ import com.tsits.tsits_webrtc.entity.MessageContant
 import com.tsits.tsits_webrtc.inter_face.OnItemClickListener
 import kotlinx.android.synthetic.main.item_group.view.*
 
-class MessageContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickListener?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageContantRvAdapter(context: Context, val mOnItemClickLitener: OnItemClickListener?) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mDataList: MutableList<Any> = ArrayList()
 
     private var context: Context = context
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): RecyclerView.ViewHolder {
-           return MessageItemViewHolder(View.inflate(parent.context, R.layout.item_message, null))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return MessageItemViewHolder(View.inflate(parent.context, R.layout.item_message, null))
 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = mDataList[position]
-        if (holder is  MessageItemViewHolder&& data is MessageContant) {
-        holder?.image?.let {
-            Glide
-                .with(context)
-                .load(data.messageImageUrl ?: "")
-                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(it)
-        }
-        holder?.group?.text = data?.group
-        holder?.time?.text = data?.time
+        if (holder is MessageItemViewHolder && data is MessageContant) {
+            holder?.image?.let {
+                Glide
+                    .with(context)
+                    .load(data.messageImageUrl ?: "")
+                    .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                    .into(it)
+            }
+            holder?.group?.text = data?.group
+            holder?.time?.text = data?.time
 
             mOnItemClickLitener?.let {
                 holder?.itemView?.setOnClickListener {
-                    mOnItemClickLitener.OnItemClick(holder?.itemView,position);
+                    mOnItemClickLitener.OnItemClick(holder?.itemView, position);
                 }
             }
-    }
+        }
     }
 
 

@@ -1,6 +1,5 @@
 package com.tsits.tsits_webrtc.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.ActivityChooserView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
 import com.tsits.tsits_webrtc.R;
-import com.tsits.tsits_webrtc.activity.MainActivity;
-import com.tsits.tsits_webrtc.activity.MessageTalkingRoomActivity;
 import com.tsits.tsits_webrtc.entity.RoomMsg;
 
 import java.util.List;
@@ -29,6 +22,8 @@ import java.util.List;
  * @date :2021/9/16 13:49
  */
 public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgViewHolder> {
+    public static final int TYPE_RECEIVED = 0;
+    public static final int TYPE_SENT = 1;
     private List<RoomMsg> mMsgList;
     private Context context;
 
@@ -48,12 +43,12 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
     @Override
     public void onBindViewHolder(@NonNull RoomMsgViewHolder holder, int position) {
         RoomMsg msg = mMsgList.get(position);
-        if (msg.getType() == RoomMsg.TYPE_RECEIVED) {
+        if (msg.getType() == TYPE_RECEIVED) {
 //            Glide.with(context).load(msg.rightHand).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
-        } else if (msg.getType() == RoomMsg.TYPE_SENT) {
+        } else if (msg.getType() == TYPE_SENT) {
 //            Glide.with(context).load(msg.rightHand).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
             holder.leftLayout.setVisibility(View.GONE);
             holder.rightLayout.setVisibility(View.VISIBLE);
