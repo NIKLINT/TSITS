@@ -179,7 +179,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         RoomMsg message = new RoomMsg(msg, type);
         msgList.add(message);
         adapter.notifyItemInserted(msgList.size() - 1);
-        msgRecyclerView.scrollToPosition(msgList.size() - 1);
+        msgRecyclerView.scrollToPosition(msgList.size() - 1);//RecyclerView视图定位，新增一项信息视图就移动到新信息上
     }
 
     class receive implements Runnable {

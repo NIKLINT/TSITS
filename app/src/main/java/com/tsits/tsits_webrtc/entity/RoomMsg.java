@@ -8,23 +8,20 @@ package com.tsits.tsits_webrtc.entity;
 public class RoomMsg {
     public static final int TYPE_RECEIVED = 0;
     public static final int TYPE_SENT = 1;
-
+    public String rightHand=null;
+    private String content;
+    private int type;
 
     public String getContent() {
         return content;
     }
 
-    public String getRightHand() {
-        return rightHand;
-    }
 
     public int getType() {
         return type;
     }
 
-    private String rightHand;
-    private String content;
-    private int type;
+
 
     public RoomMsg(String content, int type) {
         this.content = content;

@@ -43,8 +43,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:rotation="180"
-                android:background="@mipmap/ic_chat_bubble_left" />
+                android:scaleType="fitXY"
+                android:rotationY="180"
+                android:background="@mipmap/ic_chat_bubble_right" />
 
         <ImageView
             android:id="@+id/iv_hand_right"
