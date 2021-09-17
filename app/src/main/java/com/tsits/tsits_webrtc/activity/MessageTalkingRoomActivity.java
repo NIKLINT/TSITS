@@ -73,7 +73,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         @Override
         public void handleMessage(@NonNull Message msg) {
             if (!recMsg.isEmpty()) {
-                addNewMessage(recMsg, RoomMsgAdapter.TYPE_RECEIVED);//添加新数据
+                addNewMessage(recMsg, RoomMsg.TYPE_RECEIVED);//添加新数据
             }
         }
     };
@@ -336,7 +336,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         sb.append(content).append("\n\n" + date);
         content = sb.toString();
         if (!"".equals(content)) {
-            RoomMsg msg = new RoomMsg(content, RoomMsgAdapter.TYPE_SENT);
+            RoomMsg msg = new RoomMsg(content, RoomMsg.TYPE_SENT);
             msgList.add(msg);
             adapter.notifyItemInserted(msgList.size() - 1);
             msgRecyclerView.scrollToPosition(msgList.size() - 1);
