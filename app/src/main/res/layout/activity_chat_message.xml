@@ -9,6 +9,17 @@
     tools:context=".activity.MainActivity">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tv_time_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layout_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +41,9 @@
                 android:background="@mipmap/ic_chat_bubble_left" />
 
     </LinearLayout>
+
+
+
 
     <LinearLayout
         android:id="@+id/layout_right"

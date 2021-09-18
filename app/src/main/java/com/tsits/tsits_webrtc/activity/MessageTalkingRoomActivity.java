@@ -4,15 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,6 +34,9 @@ import com.tsits.tsits_webrtc.R;
 import com.tsits.tsits_webrtc.adapter.RoomMsgAdapter;
 import com.tsits.tsits_webrtc.entity.RoomMsg;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,22 +47,23 @@ import java.util.List;
  * @description:
  * @date :2021/9/14 11:15
  */
-public class MessageTalkingRoomActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
-    private List<RoomMsg> msgList = new ArrayList<>();
+public class MessageTalkingRoomActivity extends AppCompatActivity implements View.OnTouchListener {
     private static final String TAG = "MessageTalkingRoomFragment";
+    private List<RoomMsg> msgList = new ArrayList<>();
     private Dialog dialog;
     private InputMethodManager inputMethodManager;
     private RoomMsgAdapter adapter;
     private RecyclerView msgRecyclerView;
-    private boolean tof = true;
+    private boolean tof = false;
     private String recMsg;
-    //    private String name;
-//    private Socket socketSend;
+    private String name;
+    private String time;
+    //    private Socket socketSend;
 //    private String ip = "192.168.1.66";
 //    private String port = "6666";
-//    DataInputStream dis;
-//    DataOutputStream dos;
-//    boolean isRunning = false;
+    DataInputStream dis;
+    DataOutputStream dos;
+    boolean isRunning = false;
     private boolean isSend = false;
 
 
@@ -84,7 +92,18 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_message_talking);
         InitView();
-        MenuOrKeyBoard();
+        InitMethod();
+    }
+
+    private void InitMethod() {
+//        inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+//        inputMethodManager.showSoftInput(talkingroomedittext, InputMethodManager.SHOW_FORCED);
+//        Intent intent = getIntent();
+//        name = intent.getStringExtra("name");
+        changeInputMode();//切换输入模式
+        MenuOrKeyBoard();//打开关闭菜单
+        sendMessage();//发送信息
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -94,6 +113,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
                 msgRecyclerView.setAdapter(adapter);
             }
         });
+
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -132,28 +152,24 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         current_group_name = findViewById(R.id.current_group_name);//此聊天组的组名
         talkingroomedittext = findViewById(R.id.talkingroomedittext);//聊天输入框
         toolbar_navigation = findViewById(R.id.toolbar_navigation_message_talking_room);//右上角toolbar
-        toolbar_navigation.setOnClickListener(this);
         btn_menu_popup = findViewById(R.id.btn_menu_popup);//回形针弹出菜单按钮
-        btn_menu_popup.setOnClickListener(this);
         ibtn_change_input_mode = findViewById(R.id.ibtn_change_input_mode);//切换输入模式按钮
         iv_change_input_mode = findViewById(R.id.iv_change_input_mode);//切换输入模式按钮中的图样
         menu_fold = findViewById(R.id.menu_fold);//菜单折叠按钮
-        menu_fold.setOnClickListener(this);
         menu = findViewById(R.id.menu);//菜单
         imageButton1 = findViewById(R.id.imageButton1);//菜单里图片按钮
 
-
-        changeInputMode();//首界面文字输入为先
-//        inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        inputMethodManager.showSoftInput(talkingroomedittext, InputMethodManager.SHOW_FORCED);
-//        Intent intent = getIntent();
-//        name = intent.getStringExtra("name");
+        //首界面文字输入为先
+        iv_change_input_mode.setImageResource(R.drawable.ic_icon_material_record_voice_over);
+        talkingroomtextview.setVisibility(View.GONE);
+        talkingroomedittext.setVisibility(View.VISIBLE);
+        btn_menu_popup.setVisibility(View.VISIBLE);
     }
 
 
     /*
-    * 对方发送的信息
-    * */
+     * 在信息列表中插入信息
+     * */
     public void addNewMessage(String msg, int type) {
         RoomMsg message = new RoomMsg(msg, type);
         msgList.add(message);//msgList新增信息
@@ -182,7 +198,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
 //    }
 
 
-    //    class Send implements Runnable {
+//    class Send implements Runnable {
 //        @Override
 //        public void run() {
 //            while (isRunning) {
@@ -193,6 +209,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
 //                    String date = new SimpleDateFormat("hh:mm:ss").format(new Date());
 //                    StringBuilder sb = new StringBuilder();
 //                    sb.append(content).append("\n\n来自：").append(name).append("\n" + date);
+//                    Log.d(TAG,name+date);
 //                    content = sb.toString();
 //                    try {
 //                        dos.writeUTF(content);
@@ -211,42 +228,17 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
     /*
      * 获取从GroupFragment传入的数据
      * */
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK && requestCode == 102) {
-//            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
-//            String result = data.getStringExtra("getItem");
-//            Log.d(TAG, "result " + result);
-//            current_group_name.setText(result);
-//        }
-//    }
-
-
-    /*
-     * 切换键盘输入(true)/语音输入方法(false)
-     * */
-    private void changeInputMode() {
-        if (tof == true) {
-            iv_change_input_mode.setImageResource(R.drawable.ic_icon_material_record_voice_over);
-            talkingroomtextview.setVisibility(View.GONE);
-            talkingroomedittext.setVisibility(View.VISIBLE);
-            btn_menu_popup.setVisibility(View.VISIBLE);
-            tof = false;
-        } else if (tof == false) {
-            inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(talkingroomedittext.getWindowToken()
-                    , InputMethodManager.HIDE_NOT_ALWAYS);
-            iv_change_input_mode.setImageResource(R.drawable.ic_icon_awesome_keyboard);
-            talkingroomtextview.setVisibility(View.VISIBLE);
-            talkingroomedittext.setVisibility(View.GONE);
-            btn_menu_popup.setVisibility(View.GONE);
-            menu.setVisibility(View.GONE);
-            tof = true;
-        } else {
-            finish();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 102) {
+            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
+            String result = data.getStringExtra("getItem");
+            Log.d(TAG, "result " + result);
+            current_group_name.setText(result);
         }
     }
+
 
     /*
      * 设置dialog的style参数
@@ -320,41 +312,71 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         return true;
     }
 
-    /*
-     * 点击事件
-     * 发送信息按钮、菜单栏显示与隐藏
-     * */
-    @Override
-    public void onClick(View view) {
-        /*
-        * 发送自己的信息
-        * */
-        String content = talkingroomedittext.getText().toString();
-        @SuppressLint("SimpleDateFormat")
-        String date = new SimpleDateFormat("hh:mm:ss").format(new Date());
-        StringBuilder sb = new StringBuilder();
-        sb.append(content).append("\n\n" + date);
-        content = sb.toString();
-        if (!"".equals(content)) {
-            RoomMsg msg = new RoomMsg(content, RoomMsg.TYPE_SENT);
-            msgList.add(msg);
-            adapter.notifyItemInserted(msgList.size() - 1);
-            msgRecyclerView.scrollToPosition(msgList.size() - 1);
-            isSend = true;
-        }
-        sb.delete(0, sb.length());
 
-        /*
-        * 切换键盘输入/语音输入实现
-        * */
+    /*
+    * 发送信息
+    * */
+    void sendMessage() {
+        talkingroomedittext.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyCode == android.view.KeyEvent.KEYCODE_ENTER && keyEvent.getAction()
+                        == android.view.KeyEvent.ACTION_DOWN) {
+                    String content = talkingroomedittext.getText().toString();
+                    @SuppressLint("SimpleDateFormat")
+                    String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(content).append("\n\n" + date);
+                    content = sb.toString();
+                    if (!"".equals(content)) {
+                        Log.d(TAG,"is send");
+                        RoomMsg msg = new RoomMsg(content, RoomMsg.TYPE_SENT);
+                        msgList.add(msg);
+                        adapter.notifyItemInserted(msgList.size() - 1);
+                        msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                        isSend = true;
+                        talkingroomedittext.setText("");
+                    }
+                    sb.delete(0, sb.length());
+                }
+                return true;
+            }
+
+        });
+    }
+
+
+    /*
+     * 切换键盘输入(true)/语音输入(false)实现
+     * */
+    void changeInputMode() {
         ibtn_change_input_mode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //创建点击事件
-                changeInputMode();
+                if (tof == true) {
+                    Log.d(TAG, "1--------------------------------->  ibtn_change_input_mode is click!!!");
+                    iv_change_input_mode.setImageResource(R.drawable.ic_icon_material_record_voice_over);
+                    talkingroomtextview.setVisibility(View.GONE);
+                    talkingroomedittext.setVisibility(View.VISIBLE);
+                    btn_menu_popup.setVisibility(View.VISIBLE);
+                    tof = false;
+                } else if (tof == false) {
+                    Log.d(TAG, "2--------------------------------->  ibtn_change_input_mode is click!!!");
+                    inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(talkingroomedittext.getWindowToken()
+                            , InputMethodManager.HIDE_NOT_ALWAYS);
+                    iv_change_input_mode.setImageResource(R.drawable.ic_icon_awesome_keyboard);
+                    talkingroomtextview.setVisibility(View.VISIBLE);
+                    talkingroomedittext.setVisibility(View.GONE);
+                    btn_menu_popup.setVisibility(View.GONE);
+                    menu.setVisibility(View.GONE);
+                    tof = true;
+                } else {
+                    finish();
+                }
             }
         });
-
     }
 
 

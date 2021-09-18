@@ -11,6 +11,7 @@ public class RoomMsg {
     public String rightHand=null;
     private String content;
     private int type;
+    private String time;
 
     public String getContent() {
         return content;
@@ -23,6 +24,8 @@ public class RoomMsg {
 
 
 
+
+
     public RoomMsg(String content, int type) {
         this.content = content;
         this.type = type;
@@ -30,6 +33,10 @@ public class RoomMsg {
 
     public RoomMsg(String rightHand) {
         this.rightHand = rightHand;
+
     }
+
+
+
 
 }

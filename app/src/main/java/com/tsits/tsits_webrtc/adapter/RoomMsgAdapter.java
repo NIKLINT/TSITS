@@ -46,11 +46,13 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
+            holder.time.setText(msg.getContent());
         } else if (msg.getType() == RoomMsg.TYPE_SENT) {
 //            Glide.with(context).load(msg.rightHand).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
             holder.leftLayout.setVisibility(View.GONE);
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.rightMsg.setText(msg.getContent());
+            holder.time.setText(msg.getContent());
         }
     }
 
@@ -68,6 +70,7 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
         TextView rightMsg;
         ImageView leftHand;
         ImageView rightHand;
+        TextView time;
 
         public RoomMsgViewHolder(@NonNull View view) {
             super(view);
@@ -77,7 +80,7 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
             rightMsg = itemView.findViewById(R.id.msg_right);
             leftHand = itemView.findViewById(R.id.iv_hand_left);
             rightHand = itemView.findViewById(R.id.iv_hand_right);
-
+            time= itemView.findViewById(R.id.tv_time_message);
         }
     }
 
