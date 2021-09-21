@@ -43,12 +43,14 @@ public class RoomMsgAdapter extends RecyclerView.Adapter<RoomMsgAdapter.RoomMsgV
         RoomMsg msg = mMsgList.get(position);
         if (msg.getType() == RoomMsg.TYPE_RECEIVED) {
 //            Glide.with(context).load(msg.rightHand).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
+            holder.leftHand.setImageResource(R.mipmap.hand1);
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
             holder.time.setText(msg.getContent());
         } else if (msg.getType() == RoomMsg.TYPE_SENT) {
 //            Glide.with(context).load(msg.rightHand).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.rightHand);
+            holder.leftHand.setImageResource(R.mipmap.hand0);
             holder.leftLayout.setVisibility(View.GONE);
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.rightMsg.setText(msg.getContent());

@@ -31,12 +31,6 @@ public class RoomMsg {
         this.type = type;
     }
 
-    public RoomMsg(String rightHand) {
-        this.rightHand = rightHand;
-
-    }
-
-
 
 
 }

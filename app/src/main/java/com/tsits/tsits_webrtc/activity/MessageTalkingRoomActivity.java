@@ -3,8 +3,12 @@ package com.tsits.tsits_webrtc.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,6 +40,7 @@ import com.tsits.tsits_webrtc.entity.RoomMsg;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,8 +55,8 @@ import java.util.List;
 public class MessageTalkingRoomActivity extends AppCompatActivity implements View.OnTouchListener {
     private static final String TAG = "MessageTalkingRoomFragment";
     private List<RoomMsg> msgList = new ArrayList<>();
-    private Dialog dialog;
-    private InputMethodManager inputMethodManager;
+    private Dialog dialog;//按下语音输入的dialog
+    private InputMethodManager inputMethodManager;//输入方法管理
     private RoomMsgAdapter adapter;
     private RecyclerView msgRecyclerView;
     private boolean tof = false;
@@ -68,6 +73,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
 
 
     private ImageView iv_change_input_mode;
+    private ImageView iv_hand_right;
     private ImageView toolbar_navigation;
     private TextView talkingroomtextview;
     private TextView current_group_name;
@@ -103,6 +109,8 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         changeInputMode();//切换输入模式
         MenuOrKeyBoard();//打开关闭菜单
         sendMessage();//发送信息
+        MenuItemClick();//菜单Item点击事件
+
 
         runOnUiThread(new Runnable() {
             @Override
@@ -146,11 +154,26 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
     }
 
     private void InitView() {
+        iv_hand_right=findViewById(R.id.iv_hand_right);
         msgRecyclerView = findViewById(R.id.talking_log);//聊天列表
         talkingroomtextview = findViewById(R.id.talkingroomtextview);//说话按钮
         talkingroomtextview.setOnTouchListener(this);
         current_group_name = findViewById(R.id.current_group_name);//此聊天组的组名
         talkingroomedittext = findViewById(R.id.talkingroomedittext);//聊天输入框
+        talkingroomedittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if(menu.getVisibility() == View.VISIBLE) {
+                        menu.setVisibility(View.GONE);
+                    }
+                }else{
+                        if(menu.getVisibility()==View.GONE){
+                            menu.setVisibility(View.VISIBLE);
+                        }
+                }
+            }
+        });
         toolbar_navigation = findViewById(R.id.toolbar_navigation_message_talking_room);//右上角toolbar
         btn_menu_popup = findViewById(R.id.btn_menu_popup);//回形针弹出菜单按钮
         ibtn_change_input_mode = findViewById(R.id.ibtn_change_input_mode);//切换输入模式按钮
@@ -166,6 +189,16 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         btn_menu_popup.setVisibility(View.VISIBLE);
     }
 
+    void MenuItemClick(){
+        imageButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPic();//菜单Item项
+            }
+        });
+
+    }
+
 
     /*
      * 在信息列表中插入信息
@@ -176,6 +209,8 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
         adapter.notifyItemInserted(msgList.size() - 1);//通知item插入
         msgRecyclerView.scrollToPosition(msgList.size() - 1);//RecyclerView视图定位，新增一项信息视图就移动到新信息上
     }
+
+
 
 //    class receive implements Runnable {
 //        public void run() {
@@ -228,16 +263,16 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
     /*
      * 获取从GroupFragment传入的数据
      * */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 102) {
-            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
-            String result = data.getStringExtra("getItem");
-            Log.d(TAG, "result " + result);
-            current_group_name.setText(result);
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == 102) {
+//            Log.d(TAG, "resultCode: " + resultCode + "requestCode: " + requestCode);
+//            String result = data.getStringExtra("getItem");
+//            Log.d(TAG, "result " + result);
+//            current_group_name.setText(result);
+//        }
+//    }
 
 
     /*
@@ -257,10 +292,10 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
     }
 
     /*
-     *打开菜单并关闭输入法/打开输入法并关闭菜单
+     *点击回形针按钮弹出/隐藏菜单
      */
     private void MenuOrKeyBoard() {
-        btn_menu_popup.setOnClickListener(new View.OnClickListener() {//点击回形针按钮弹出/隐藏菜单
+        btn_menu_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (menu.getVisibility() == View.GONE) {
@@ -314,8 +349,8 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
 
 
     /*
-    * 发送信息
-    * */
+     * 发送信息
+     * */
     void sendMessage() {
         talkingroomedittext.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -329,7 +364,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
                     sb.append(content).append("\n\n" + date);
                     content = sb.toString();
                     if (!"".equals(content)) {
-                        Log.d(TAG,"is send");
+                        Log.d(TAG, "is send");
                         RoomMsg msg = new RoomMsg(content, RoomMsg.TYPE_SENT);
                         msgList.add(msg);
                         adapter.notifyItemInserted(msgList.size() - 1);
@@ -339,7 +374,7 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
                     }
                     sb.delete(0, sb.length());
                 }
-                return true;
+                return false;
             }
 
         });
@@ -380,47 +415,49 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
     }
 
 
-//    /**
-//     * 打开本地相册选择图片
-//     */
-//    private void selectPic(){
-//        //intent可以应用于广播和发起意图，其中属性有：ComponentName,action,data等
-//        Intent intent=new Intent();
-//        intent.setType("image/*");
-////        intent.setType("audio/*"); //选择音频
-////        intent.setType("video/*"); //选择视频 （mp4 3gp 是android支持的视频格式）
-////        intent.setType("video/*;image/*");//同时选择视频和图片
-//        //action表示intent的类型，可以是查看、删除、发布或其他情况；我们选择ACTION_GET_CONTENT，系统可以根据Type类型来调用系统程序选择Type
-//        //类型的内容给你选择
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        //如果第二个参数大于或等于0，那么当用户操作完成后会返回到本程序的onActivityResult方法
-//        startActivityForResult(intent, 1);
-//    }
-//    /**
-//     *把用户选择的图片显示在imageview中
-//     */
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        //用户操作完成，结果码返回是-1，即RESULT_OK
-//        if(resultCode==RESULT_OK){
-//            //获取选中文件的定位符
-//            Uri uri = data.getData();
-//            Log.e("uri", uri.toString());
-//            //使用content的接口
-//            ContentResolver cr = this.getContext().getContentResolver();
-//            try {
-//                //获取图片
-//                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-//                image.setImageBitmap(bitmap);
-//            } catch (FileNotFoundException e) {
-//                Log.e("Exception", e.getMessage(),e);
-//            }
-//        }else{
-//            //操作错误或没有选择图片
-//            Log.i("MainActivtiy", "operation error");
-//        }
-//        super.onActivityResult(requestCode, resultCode, data);
-//    }
+    /**
+     * 打开本地相册选择图片
+     */
+    private void selectPic(){
+        //intent可以应用于广播和发起意图，其中属性有：ComponentName,action,data等
+        Intent intent=new Intent();
+        intent.setType("image/*");
+//        intent.setType("audio/*"); //选择音频
+//        intent.setType("video/*"); //选择视频 （mp4 3gp 是android支持的视频格式）
+//        intent.setType("video/*;image/*");//同时选择视频和图片
+        //action表示intent的类型，可以是查看、删除、发布或其他情况；我们选择ACTION_GET_CONTENT，系统可以根据Type类型来调用系统程序选择Type
+        //类型的内容给你选择
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        //如果第二个参数大于或等于0，那么当用户操作完成后会返回到本程序的onActivityResult方法
+        startActivityForResult(intent, 1);
+    }
+    /**
+     *把用户选择的图片显示在imageview中
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //用户操作完成，结果码返回是-1，即RESULT_OK
+        if(resultCode==RESULT_OK){
+            //获取选中文件的定位符
+            Uri uri = data.getData();
+            Log.e("uri", uri.toString());
+            //使用content的接口
+            ContentResolver cr = this.getContentResolver();
+            try {
+                //获取图片
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                iv_hand_right.setImageBitmap(bitmap);
+
+
+            } catch (FileNotFoundException e) {
+                Log.e("Exception", e.getMessage(),e);
+            }
+        }else{
+            //操作错误或没有选择图片
+            Log.i("MainActivtiy", "operation error");
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
 
 
