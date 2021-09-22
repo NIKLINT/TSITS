@@ -1,14 +1,8 @@
 package com.tsits.tsits_webrtc.activity
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tsits.pocvideosdk.Stru_FriendInfo
-import com.tsits.pocvideosdk.Stru_GPSData
-import com.tsits.pocvideosdk.Stru_GroupInfo
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback
-import com.tsits.tsits_webrtc.sdk.TSPocVideo
 
 class VideoCallActivity : AppCompatActivity() {
 

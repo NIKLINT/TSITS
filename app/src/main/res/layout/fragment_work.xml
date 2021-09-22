@@ -45,26 +45,65 @@
             android:id="@+id/et_change_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="Edit Your New Name"
             android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></EditText>
 
         <Button
-            android:id="@+id/change_name_button"
+            android:id="@+id/btn_change_name"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"
             android:hint="Change Your Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_change_name">
 
         </Button>
+
+        <EditText
+            android:id="@+id/et_id_word"
+            android:layout_width="0dp"
+            android:maxLength="8"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Set Your ID"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_change_name"></EditText>
+
+        <Button
+            android:id="@+id/btn_id_work"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Change Your ID"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_id_word">
+
+        </Button>
+
+        <EditText
+            android:id="@+id/et_versionCode_work"
+            android:layout_width="0dp"
+            android:maxLength="8"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint=""
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_id_work"></EditText>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

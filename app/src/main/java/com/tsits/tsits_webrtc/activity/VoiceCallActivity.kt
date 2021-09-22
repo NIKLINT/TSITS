@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_work.*
 import java.io.FileNotFoundException
 
 class VoiceCallActivity : AppCompatActivity() {
-    private iv_hand_voice
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_voice_chat)

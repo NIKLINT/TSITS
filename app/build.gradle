@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.tsits.tsits_webrtc"
-        minSdkVersion 24
+        minSdkVersion 25
         targetSdkVersion 30
         versionCode 1
 //        versionName kotlin_version
@@ -70,7 +70,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation(name: 'BaiduLBS_AndroidSDK_Lib', ext: 'aar')
     implementation(name: 'escodec', ext: 'aar')
-    compile(name: 'PocVideoSDK_debug', ext: 'aar')
+    compile(name: 'PocVideoSDK-debug', ext: 'aar')
+    compile(name: 'JanusClientSDK-debug', ext: 'aar')
+    compile(name: 'logAndCrash-debug', ext: 'aar')
+    compile(name: 'XMPPClientSDK-debug', ext: 'aar')
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 //    implementation "com.shopify:livedata-ktx:2.0.0"

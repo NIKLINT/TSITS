@@ -6,13 +6,24 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tv_groupname_group"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:gravity="center_vertical|right"
+        android:gravity="center_vertical|left"
+        android:text="apple"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_groupID_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="5"
+        android:gravity="center_vertical|left"
         android:text="apple"
         android:textSize="20dp" />
 

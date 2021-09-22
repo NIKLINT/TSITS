@@ -1,15 +1,10 @@
 package com.tsits.tsits_webrtc.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tsits.tsits_webrtc.R;
-import com.tsits.tsits_webrtc.sdk.TSPocVideo;
+import com.tsits.tsits_webrtc.manager.ITSPocVideoSend;
+import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback;
+import com.tsits.tsits_webrtc.sdk.TSPocVideoSDK;
 
 /**
  * @author YUAN
@@ -28,6 +25,9 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo;
  */
 public class GroupDetailActivity extends AppCompatActivity {
     private static final String TAG = "GroupDetailActivity";
+
+
+
     private ImageButton phone_call_detail;
     private ImageButton phone_call_detail_background;
     private ImageView toolbar_navigation_detail;
@@ -85,8 +85,12 @@ public class GroupDetailActivity extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(GroupDetailActivity.this
-                        , "You choiced this" + items[i], Toast.LENGTH_SHORT).show();
+                if (i==0){
+
+                }else if(i==1){
+                    Toast.makeText(GroupDetailActivity.this
+                            , "You choiced this1" + items[i], Toast.LENGTH_SHORT).show();
+                }
             }
         });
         AlertDialog dialog = builder.create();

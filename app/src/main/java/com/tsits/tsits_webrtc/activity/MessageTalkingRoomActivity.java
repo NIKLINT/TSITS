@@ -153,6 +153,9 @@ public class MessageTalkingRoomActivity extends AppCompatActivity implements Vie
 //        }).start();
     }
 
+    /*
+    * 初始化视图
+    * */
     private void InitView() {
         iv_hand_right=findViewById(R.id.iv_hand_right);
         msgRecyclerView = findViewById(R.id.talking_log);//聊天列表

@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.tsits.tsits_webrtc.R
-import com.tsits.tsits_webrtc.inter_face.OnItemClickListener
 import com.tsits.tsits_webrtc.entity.Contant
+import com.tsits.tsits_webrtc.inter_face.OnItemClickListener
 import com.tsits.tsits_webrtc.entity.ContantTitle
 
 class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickListener?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -38,8 +38,7 @@ class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickList
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = mDataList[position]
         if (holder is TitleViewHolder && data is ContantTitle) {
-            holder?.title?.text = data.title
-
+            holder?.title?.text = data?.title
             mOnItemClickLitener?.let {
                 holder?.itemView?.setOnClickListener {
                     mOnItemClickLitener.OnItemClick(holder?.itemView,position);
@@ -54,7 +53,7 @@ class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickList
                     .into(it)
             }
             holder?.name?.text = data?.name
-            holder?.phone?.text = data?.phone
+            holder?.phone?.text = data?.phone.toString()
 
             mOnItemClickLitener?.let {
                 holder?.itemView?.setOnClickListener {
@@ -82,8 +81,8 @@ class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickList
 
         constructor(itemView: View) : super(itemView) {
             image = itemView.findViewById(R.id.image)
-            name = itemView.findViewById(R.id.name)
-            phone = itemView.findViewById(R.id.phone)
+            name = itemView.findViewById(R.id.tv_nickname_group)
+            phone = itemView.findViewById(R.id.tv_deviceID_group)
         }
     }
 

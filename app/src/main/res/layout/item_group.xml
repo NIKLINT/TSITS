@@ -18,7 +18,7 @@
         android:layout_marginBottom="5dp"/>
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/tv_nickname_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
@@ -28,7 +28,7 @@
             />
 
         <TextView
-            android:id="@+id/phone"
+            android:id="@+id/tv_deviceID_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"

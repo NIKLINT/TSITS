@@ -1,6 +1,9 @@
 package com.tsits.tsits_webrtc.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.tsits.pocvideosdk.TSPocVideo;
 import com.tsits.tsits_webrtc.R;
 import com.tsits.tsits_webrtc.activity.VoiceCallActivity;
-import com.tsits.tsits_webrtc.manager.HardwareInformationUtil;
-import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback;
-import com.tsits.tsits_webrtc.sdk.TSPocVideo;
 
 /**
  * @author YUAN
@@ -26,10 +27,15 @@ import com.tsits.tsits_webrtc.sdk.TSPocVideo;
  */
 public class WorkFragment extends Fragment {
 
-    private HardwareInformationUtil hardwareInformationUtil;
 
-    private Button change_name_button;
+    public int locationID = 0;
+    public String version;
+
+    private Button btn_change_name;
+    private Button btn_id_work;
     private EditText et_change_name;
+    private EditText et_id_word;
+    private EditText et_versionCode_work;
     private ImageView toolbar_navigation_work;
 
     @Nullable
@@ -44,22 +50,25 @@ public class WorkFragment extends Fragment {
         Init();
         turnToVoiceCallActivity();
         changeNickName();
-
+        setLocationId();
+        getVersionCode(getContext());
     }
 
     private void Init() {
-        change_name_button=getActivity().findViewById(R.id.change_name_button);
-        et_change_name=getActivity().findViewById(R.id.et_change_name);
-        toolbar_navigation_work=getActivity().findViewById(R.id.toolbar_navigation_work);
+        btn_change_name = getActivity().findViewById(R.id.btn_change_name);
+        btn_id_work = getActivity().findViewById(R.id.btn_id_work);
+        et_change_name = getActivity().findViewById(R.id.et_change_name);
+        et_id_word = getActivity().findViewById(R.id.et_id_word);
+        et_versionCode_work=getActivity().findViewById(R.id.et_versionCode_work);
+        toolbar_navigation_work = getActivity().findViewById(R.id.toolbar_navigation_work);
 
     }
 
     private void changeNickName() {
-        change_name_button.setOnClickListener(new View.OnClickListener() {
+        btn_change_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TSPocVideo.getInstance().Device_ChangeInfo(et_change_name.getText().toString());
-
             }
         });
     }
@@ -72,4 +81,30 @@ public class WorkFragment extends Fragment {
             }
         });
     }
+
+    /*设置设备通信ID*/
+    void setLocationId() {
+        btn_id_work.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationID = Integer.parseInt(et_id_word.getText().toString());
+            }
+        });
+    }
+
+    /*获取软件版本号*/
+    public  String getVersionCode(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = packageManager.getPackageInfo(
+                    context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        version = packageInfo.versionName;
+        et_versionCode_work.setText(version+"");
+        return version;
+    }
+
 }
