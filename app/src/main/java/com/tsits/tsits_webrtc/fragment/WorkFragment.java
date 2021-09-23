@@ -1,10 +1,13 @@
 package com.tsits.tsits_webrtc.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,22 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.tsits.pocvideosdk.Stru_GPSSetting;
 import com.tsits.pocvideosdk.TSPocVideo;
+import com.tsits.pocvideosdk.callback.TSClientCallback;
+import com.tsits.tsclientsdk.TSClient;
 import com.tsits.tsits_webrtc.R;
 import com.tsits.tsits_webrtc.activity.VoiceCallActivity;
+import com.tsits.tsits_webrtc.entity.Stru_JanusService;
+import com.tsits.tsits_webrtc.entity.Stru_TSRTCService;
+import com.tsits.tsits_webrtc.entity.Stru_XMPPService;
+import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback;
+
+import static com.tsits.tsits_webrtc.activity.LoginActivity.REQUEST_READ_PHONE_STATE;
 
 /**
  * @author YUAN
@@ -27,9 +41,18 @@ import com.tsits.tsits_webrtc.activity.VoiceCallActivity;
  */
 public class WorkFragment extends Fragment {
 
-
+    public final static int REQUEST_READ_PHONE_STATE = 1;
+    public String DEVICE_ID;
     public int locationID = 0;
     public String version;
+    private com.tsits.janusclientsdk.Stu.Stru_JanusService stru_janusService=
+            new com.tsits.janusclientsdk.Stu.Stru_JanusService("1111,1111,1111,1111",8888);
+    private com.tsits.tsclientsdk.stru.Stru_TSRTCService stru_tsrtcService=
+            new com.tsits.tsclientsdk.stru.Stru_TSRTCService("1111,1111,1111,1111",8888);
+    private com.tsits.xmppclientsdk.stu.Stru_XMPPService stru_xmppService=
+            new com.tsits.xmppclientsdk.stu.Stru_XMPPService("1111,1111,1111,1111",8888,"kkk");
+    private Stru_GPSSetting stru_gpsSetting=
+            new Stru_GPSSetting((byte)0,(short)1,(short)0,(short)0,(short)0,(short)0,0,1,1);
 
     private Button btn_change_name;
     private Button btn_id_work;
@@ -52,6 +75,7 @@ public class WorkFragment extends Fragment {
         changeNickName();
         setLocationId();
         getVersionCode(getContext());
+        initPhone();
     }
 
     private void Init() {
@@ -92,6 +116,29 @@ public class WorkFragment extends Fragment {
         });
     }
 
+//    /*
+//    获取设备IMEI
+//    * */
+//    void getDeviceID(Context context) {
+//        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+//        account.setText(ANDROID_ID);//获取ANDROID_ID号
+//
+//        int permissionCheck = ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.READ_PHONE_STATE);
+//        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE},
+//                    REQUEST_READ_PHONE_STATE);
+//        } else {
+//            try {
+//                TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+//                DEVICE_ID = telephonyManager.getDeviceId();
+//                password.setText(DEVICE_ID);
+//            }catch (Exception e){
+//                TSClient.g
+//            }
+//        }
+//    }
+
     /*获取软件版本号*/
     public  String getVersionCode(Context context) {
         PackageManager packageManager = context.getPackageManager();
@@ -105,6 +152,11 @@ public class WorkFragment extends Fragment {
         version = packageInfo.versionName;
         et_versionCode_work.setText(version+"");
         return version;
+    }
+
+    void initPhone(){
+//        TSClient.getInstance().Init(locationID,DEVICE_ID,version,stru_tsrtcService);
+//        TSPocVideo.getInstance().Init(locationID,DEVICE_ID,version,stru_janusService,stru_tsrtcService,stru_xmppService,stru_gpsSetting);
     }
 
 }

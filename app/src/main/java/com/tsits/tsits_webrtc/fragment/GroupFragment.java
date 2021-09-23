@@ -15,12 +15,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tsits.pocvideosdk.TSPocVideo;
+import com.tsits.tsclientsdk.TSClient;
 import com.tsits.tsits_webrtc.R;
 import com.tsits.tsits_webrtc.activity.GroupDetailActivity;
 import com.tsits.tsits_webrtc.adapter.ContantRvAdapter;
+import com.tsits.tsits_webrtc.adapter.Stru_FriendInfo_Adapter;
 import com.tsits.tsits_webrtc.entity.Contant;
 import com.tsits.tsits_webrtc.entity.ContantTitle;
 import com.tsits.tsits_webrtc.inter_face.OnItemClickListener;
+import com.tsits.xmppclientsdk.stu.Stru_FriendInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +35,10 @@ import java.util.List;
  * @date :2021/9/14 10:29
  */
 public class GroupFragment extends Fragment implements OnItemClickListener {
-    private static final String TAG="GroupFragment";
+    private static final String TAG = "GroupFragment";
     ArrayList dataList = new ArrayList<Object>();
     private RecyclerView recyclerView_group;
+    private List<Stru_FriendInfo> friendList;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,14 +86,17 @@ public class GroupFragment extends Fragment implements OnItemClickListener {
      * 取得列表
      * */
     private List<Object> getData() {
+        TSPocVideo.getItsPocVideoCallback().Friend_List(friendList);
         for (int tindex = 0; tindex < 3; tindex++) {
-            dataList.add(new ContantTitle("title" + tindex));
+            dataList.add(new ContantTitle("title" + tindex
+                    , "id" + tindex));
+
             for (int index = 0; index < 5; index++) {
                 dataList.add(
                         new Contant(
                                 "https://img1.baidu.com/it/u=1502334019,908245671&fm=26&fmt=auto&gp=0.jpg",
-                                "name1:"+index,
-                                "phone2:"+index
+                                "name1:" + index,
+                                "phone2:" + index
                         )
                 );
             }

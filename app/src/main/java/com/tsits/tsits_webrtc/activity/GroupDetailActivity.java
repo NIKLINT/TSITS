@@ -2,7 +2,6 @@ package com.tsits.tsits_webrtc.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,10 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tsits.pocvideosdk.TSPocVideo;
 import com.tsits.tsits_webrtc.R;
-import com.tsits.tsits_webrtc.manager.ITSPocVideoSend;
-import com.tsits.tsits_webrtc.sdk.ITSPocVideoCallback;
-import com.tsits.tsits_webrtc.sdk.TSPocVideoSDK;
 
 /**
  * @author YUAN
@@ -86,7 +83,8 @@ public class GroupDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i==0){
-
+                    Toast.makeText(GroupDetailActivity.this
+                            , "You choiced this1" + items[i], Toast.LENGTH_SHORT).show();
                 }else if(i==1){
                     Toast.makeText(GroupDetailActivity.this
                             , "You choiced this1" + items[i], Toast.LENGTH_SHORT).show();
@@ -95,6 +93,7 @@ public class GroupDetailActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+
     }
 
 }

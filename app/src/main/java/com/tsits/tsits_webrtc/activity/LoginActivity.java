@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.tsits.pocvideosdk.TSPocVideo;
 import com.tsits.tsits_webrtc.R;
+import com.tsits.tsits_webrtc.fragment.WorkFragment;
 
 /**
  * @author YUAN
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
         password = findViewById(R.id.password);
         getDeviceID(this);
     }
+
 
 
     /*
@@ -76,4 +79,6 @@ public class LoginActivity extends AppCompatActivity implements ActivityCompat.O
 //        }
 //
 //    }
+
+
 }

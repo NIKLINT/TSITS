@@ -39,6 +39,7 @@ class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickList
         val data = mDataList[position]
         if (holder is TitleViewHolder && data is ContantTitle) {
             holder?.title?.text = data?.title
+            holder?.id?.text=data?.id
             mOnItemClickLitener?.let {
                 holder?.itemView?.setOnClickListener {
                     mOnItemClickLitener.OnItemClick(holder?.itemView,position);
@@ -88,9 +89,11 @@ class ContantRvAdapter(context: Context,val mOnItemClickLitener: OnItemClickList
 
     class TitleViewHolder : RecyclerView.ViewHolder {
         var title: TextView? = null
+        var id:TextView?=null
 
         constructor(itemView: View) : super(itemView) {
-            title = itemView.findViewById(R.id.title)
+            title = itemView.findViewById(R.id.tv_groupname_group)
+            id=itemView.findViewById(R.id.tv_groupID_group)
         }
     }
 }
